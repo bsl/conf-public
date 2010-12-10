@@ -1,0 +1,3 @@
+set history=0
+javascript liberator.beep = function() { return false; }
+set focuscontent

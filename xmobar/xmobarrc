@@ -1,0 +1,42 @@
+Config { font         = "xft:Terminus"
+       , bgColor      = "black"
+       , fgColor      = "white"
+       , position     = Top
+       , lowerOnStart = False
+       , commands     = [ Run Date "%a %b %_d %Y %H:%M:%S" "date" 10
+                        , Run Memory
+                            [ "-t", "<usedratio>"
+                            , "-p", "3"
+                            , "-c", "·"
+                            , "-L", "25"
+                            , "-H", "75"
+                            , "--low",    "green"
+                            , "--normal", "yellow"
+                            , "--high",   "red"
+                            ] 10
+                        , Run Cpu
+                            [ "-t", "<total>"
+                            , "-p", "3"
+                            , "-c", "·"
+                            , "-L", "25"
+                            , "-H", "75"
+                            , "--low",    "green"
+                            , "--normal", "yellow"
+                            , "--high",   "red"
+                            ] 10
+                        , Run Battery
+                            [ "--template", "<left>"
+                            , "-p", "3"
+                            , "-c", "·"
+                            , "-L", "50"
+                            , "-H", "75"
+                            , "--high",   "green"
+                            , "--normal", "yellow"
+                            , "--low",    "red"
+                            ] 100
+                        , Run StdinReader
+                        ]
+       , sepChar      = "$"
+       , alignSep     = "}{"
+       , template     = "$StdinReader$ <fc=gray,#282828> $date$ </fc>}{$cpu$<fc=darkgray>%</fc><fc=white>cpu</fc> $memory$<fc=darkgray>%</fc><fc=white>mem</fc> $battery$<fc=darkgray>%</fc><fc=white>batt</fc>"
+       }

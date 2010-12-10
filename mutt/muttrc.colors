@@ -1,0 +1,27 @@
+color hdrdefault yellow       black
+color quoted     brightred    black
+color signature  magenta      black
+color indicator  brightwhite  red
+color attachment black        green
+color error      white        black
+color message    white        black
+color search     brightwhite  magenta
+color status     brightyellow blue
+color tree       red          black
+color normal     white        black
+color tilde      green        black
+color bold       brightyellow black
+color markers    red          black
+color header     yellow       black   ".*:"
+color header     brightwhite  black   "^(From|Subject):"
+color index      brightblue   black   ~N
+color index      red          black   ~F
+color index      black        green   ~T
+color index      brightwhite  black   ~D
+
+# URLs
+color body brightblue black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body brightblue black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
+
+# email addresses
+color body brightblue black "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"

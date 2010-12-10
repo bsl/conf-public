@@ -1,0 +1,31 @@
+#! /bin/bash
+
+# add font directory for terminus
+xset +fp /usr/share/fonts/local
+
+# speed up keyboard repeat
+xset r rate 200 50
+
+disable-screen-blanking
+
+xsetroot -cursor_name left_ptr
+xsetroot -solid '#0f0f0f'
+
+urxvtd -q -f -o
+
+# XXX scim is making urxvt very slow to open
+#which scim > /dev/null
+#if [ $? -eq 0 ]
+#then
+#  export XMODIFIERS='@im=SCIM'
+#  export GTK_IM_MODULE='scim'
+#  export QT_IM_MODULE='scim'
+#  scim -d
+#fi
+
+if which dbus-launch >/dev/null && [[ -z "$DBUS_SESSION_BUS_ADDRESS" ]]
+then
+  eval "$(dbus-launch --sh-syntax --exit-with-session)"
+fi
+
+exec awesome

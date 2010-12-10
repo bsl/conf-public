@@ -1,0 +1,159 @@
+#! /usr/bin/zsh
+
+[ -e ~/.profile ] && source ~/.profile
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+setopt vi
+bindkey -v
+
+setopt no_beep
+setopt extended_glob
+setopt always_to_end        # always go to end of word after completion
+setopt auto_cd              # do cd path if only 'path' is given as command
+setopt auto_pushd           # cd = pushd
+setopt pushd_silent         # don't print stack after push/pop
+setopt pushd_ignore_dups    # ignore dups in pushd
+setopt bang_hist            # ! expansion
+setopt complete_in_word     # we want completion to be done from cursor in word
+setopt hist_ignore_all_dups # ignore all -- even non contiguous -- dups
+setopt hist_save_no_dups
+setopt hist_ignore_space
+setopt interactive_comments # allow comments in interactive shell
+setopt no_rm_star_wait      # don't idle 10 seconds
+setopt rm_star_silent
+#setopt transient_rprompt    # rprompt disappears after i hit enter
+
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
+
+REPORTTIME=4
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# tap jj to enter command mode
+bindkey 'jj' vi-cmd-mode
+
+# make _ act like vim
+bindkey -M vicmd '_' vi-beginning-of-line
+
+# make C-d exit even if the line isn't empty
+really_exit () {
+    BUFFER="exit"
+    zle accept-line
+}
+zle -N really_exit
+bindkey "" really_exit
+
+#clear2 () {
+#    zle clear-screen
+#}
+#zle -N clear2
+#bindkey "" clear2
+
+# C-l -> clear
+bindkey '^[p' push-input
+bindkey -s "^L" "^[pclear\n"
+
+# C-k -> cd ..
+cd_up () {
+    BUFFER='cd ..'
+    zle accept-line
+}
+zle -N cd_up
+bindkey "" cd_up
+
+# C-h -> popd
+cd_pop () {
+    BUFFER='popd'
+    zle accept-line
+}
+zle -N cd_pop
+bindkey "" cd_pop
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+autoload -U compinit && compinit
+autoload zmv
+autoload zsh/complist
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
+
+unset MAILCHECK LOGCHECK
+export LESSHISTFILE=-
+
+export GREP_OPTIONS='--color=auto'
+export GREP_COLOR='01;33'
+export VISUAL=vim
+
+export GEM_HOME="${HOME}/.gem"
+
+hash -d d="${HOME}/tmp/download"
+
+alias pwsafe='pwsafe -q'
+alias vi='vim'
+alias ls='ls --color=auto --group-directories-first'
+
+alias -g G='|grep --color=auto'
+alias -g L='|less'
+
+alias optipng='optipng -zc1-9 -zm1-9 -zs0-3 -f0-5'
+
+alias vima='vim $(find . -path "./.git" -prune -o -path "./dist" -prune -o -type f -print)'
+alias space='du -s -B 1M * | sort -nr | less'
+alias hadd='cabal haddock && firefox dist/doc/html/*/index.html'
+alias ca='cabal clean && cabal configure && cabal build'
+
+eval $(dircolors -b)
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+autoload colors && colors
+
+for COLOR in BLACK RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+  eval BG_${COLOR}='%{$bg[${(L)COLOR}]%}'
+  eval FG_$COLOR='%{$fg[${(L)COLOR}]%}'
+  eval FG_BRIGHT_$COLOR='%{$fg_bold[${(L)COLOR}]%}'
+done
+
+RESET="%{${reset_color}%}"
+
+precmd() {
+  local ec=$?
+  if [ "${ec}" -ne '0' ]; then
+    EXITCODE="${BG_RED}${FG_BRIGHT_WHITE}$(printf '%3d' ${ec})${RESET}"
+  else
+    EXITCODE="${FG_BRIGHT_BLACK}...${RESET}"
+  fi
+}
+
+VI_INS_MODE_TEXT="${BG_BLUE}${FG_BRIGHT_WHITE}INS${RESET}"
+VI_CMD_MODE_TEXT="${BG_MAGENTA}${FG_BRIGHT_WHITE}CMD${RESET}"
+
+VIMODE="${VI_INS_MODE_TEXT}"
+
+function accept_line {
+    VIMODE="${VI_INS_MODE_TEXT}"
+    builtin zle .accept-line
+}
+zle -N accept_line
+bindkey -M vicmd "^M" accept_line
+
+function zle-keymap-select {
+  if [[ "${KEYMAP}" =~ '(main|viins)' ]]; then
+    VIMODE="${VI_INS_MODE_TEXT}"
+  else
+    VIMODE="${VI_CMD_MODE_TEXT}"
+  fi
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+setopt prompt_subst
+
+PROMPT='${RESET}${EXITCODE}${VIMODE} ${FG_BRIGHT_WHITE}%#${RESET} '
+RPROMPT='${RESET}${FG_BRIGHT_BLACK}[${RESET}${FG_BRIGHT_YELLOW}%20<..<%~${RESET}${FG_BRIGHT_BLACK}]${RESET}'

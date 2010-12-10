@@ -1,0 +1,12 @@
+[user]
+  name  = Brian Lewis
+  email = brian@lorf.org
+
+[color]
+  ui = auto
+
+[sendemail]
+  confirm = auto
+
+[core]
+  excludesfile = ~/conf/public/git/gitignore_global

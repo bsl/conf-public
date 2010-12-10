@@ -1,0 +1,13 @@
+#! /bin/bash
+
+export PATH=$HOME/bin:/bin:/usr/bin:/sbin:/usr/sbin
+export PATH=$PATH:/opt/java/bin
+export PATH=$PATH:/opt/android-sdk/{tools,platform-tools}
+
+if [[ -z "$DISPLAY" ]] && [[ ! -a "/tmp/.X11-unix/X0" ]] && [[ $(tty) = /dev/tty1 ]]
+then
+  (xinit -- /usr/bin/Xorg -nolisten tcp &)
+  exit
+fi
+
+eval $(keychain -q --eval id_rsa) # D44C440C)

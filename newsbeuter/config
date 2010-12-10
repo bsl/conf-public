@@ -1,0 +1,16 @@
+browser firefox
+datetime-format %Y.%m.%d %R
+
+bind-key j down
+bind-key k up
+bind-key h prev-unread-feed
+bind-key l next-unread-feed
+
+bind-key x quit
+
+auto-reload yes
+reload-time 30
+reload-threads 8
+notify-beep yes # for urgency
+
+history-limit 0

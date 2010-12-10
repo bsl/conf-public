@@ -1,0 +1,76 @@
+set nocompatible
+set modelines=0
+set nobackup nowritebackup noswapfile viminfo=
+set notitle showmode showcmd number ruler cursorline
+set lazyredraw
+set noerrorbells vb t_vb=
+set mouse=a " just for scroll wheel. can still do normal term copying by holding shift
+set pastetoggle=<F11>
+set wildmenu
+set complete+=k
+set backspace=indent,eol,start
+set encoding=utf8
+
+filetype plugin indent on
+
+set spelllang=en
+
+let maplocalleader = "\\"
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+map <LocalLeader>ev :tabedit ~/.vimrc<cr>
+map <LocalLeader>sv :source ~/.vimrc<CR>
+
+imap jj <ESC>
+nmap <silent> <LocalLeader>ww :up<CR>
+nmap <silent> <LocalLeader>ss :setlocal spell!<CR>
+
+nmap <silent> <F1> :Explore<CR>
+nmap <silent> <F2> :Sexplore<CR>
+
+nmap <silent> <F6> :bp<CR>
+nmap <silent> <F7> :bn<CR>
+
+nmap <silent> <F12> :noh<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function! BrianReplaceWord(word0, word1)
+  exec "normal" "mz"
+  exec "%s/\\<" . a:word0 . "\\>/" . a:word1 . "/g"
+  exec "normal" "`z"
+endfunction
+
+nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+function! BrianRemoveTrailingWhitespace()
+  exec "normal" "mz"
+  exec "%s/\\s\\+$//e"
+  exec "normal" "`z"
+endfunction
+
+nmap <silent> <LocalLeader>ws :call BrianRemoveTrailingWhitespace()<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+let g:netrw_list_hide = "^\\..*$"
+
+set laststatus=2
+let g:obviousModeInsertHi = "term=reverse ctermfg=15 ctermbg=18"
+
+syntax on
+colorscheme jellybeans_b
+
+"highlight Search guifg=NONE ctermfg=NONE gui=none cterm=none
+highlight SpellBad ctermbg=17 ctermfg=15
+highlight SpellCap ctermbg=17 ctermfg=15
+
+set autoindent smartindent
+set shiftwidth=2 tabstop=2 expandtab
+set nowrap
+
+highlight WSError ctermbg=52
+match WSError /\s\+$\|\t/

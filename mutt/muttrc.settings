@@ -1,0 +1,39 @@
+set editor="vim"
+set user_agent=no                       # don't advertise
+set move=no                             # do not ask about moving read messages from spool mailbox to mbox
+set timeout=5                           # number of seconds to wait for keypress in main menu before checking for new mail
+set mail_check=5                        # number of seconds before checking for new mail
+set sleep_time=0                        # suppress an annoying pause
+set sort=date-received
+set strict_threads=yes
+set forward_quote=yes
+set include=yes
+set beep=no                             # do not beep on error
+set beep_new=yes                        # beep when new mail arrives
+set date_format="%A, %d.%m.%y at %H:%M"
+set menu_scroll=yes
+set pager_index_lines=6
+set pager_stop=yes
+set fast_reply=yes                      # do not ask for to: or subject: on reply
+
+ignore *
+unignore date: from: to: subject: cc: user-agent: x-mailer:
+hdr_order date: from: to: subject: cc: user-agent: x-mailer:
+
+# - - - - - - - - - - - - - - - - - - - -
+
+bind index   G   last-entry
+bind browser G   last-entry
+bind pager   G   bottom
+
+bind index   0   first-entry
+bind browser 0   first-entry
+bind pager   0   top
+
+bind browser J   next-entry
+bind browser K   previous-entry
+
+bind pager   j   next-line
+bind pager   k   previous-line
+bind pager   \Cd next-page
+bind pager   \Cu previous-page

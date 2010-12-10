@@ -1,0 +1,3 @@
+:set editor vim
+:set -XTemplateHaskell
+:def hoogle \str -> return $ ":! hoogle --count=10 \"" ++ str ++ "\""

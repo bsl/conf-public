@@ -1,0 +1,10 @@
+sub on_focus_in {
+  my ($term) = @_;
+  $term->cmd_parse("\033]11;#000012\007");
+  ()
+}
+sub on_focus_out {
+  my ($term) = @_;
+  $term->cmd_parse("\033]11;#000000\007");
+  ()
+}

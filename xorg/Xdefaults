@@ -1,0 +1,40 @@
+URxvt*cutchars:
+URxvt*urgentOnBell: true
+
+URxvt*scrollBar: false
+URxvt*font: xft:Terminus:pixelsize=6x12:antialias=false
+!URxvt*cursorColor: #aece92
+!URxvt*borderless: true
+!URxvt*cursorBlink: true
+
+URxvt*background: black
+URxvt*foreground: gray
+
+URxvt*color0:  #000000
+URxvt*color1:  #9e1828
+URxvt*color2:  #aece92
+URxvt*color3:  #968a38
+URxvt*color4:  #414171
+URxvt*color5:  #963c59
+URxvt*color6:  #418179
+URxvt*color7:  #bebebe
+URxvt*color8:  #666666
+URxvt*color9:  #cf6171
+URxvt*color10: #c5f779
+URxvt*color11: #fff796
+URxvt*color12: #4186be
+URxvt*color13: #cf9ebe
+URxvt*color14: #71bebe
+URxvt*color15: #ffffff
+
+URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus:pixelsize=6x12, xft:Microsoft Yahei:size=16\007
+URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=16, xft:Microsoft Yahei:size=16\007
+URxvt.keysym.Mod4-F3: command:\033]50;xft:Terminus:size=24, xft:Microsoft Yahei:size=16\007
+
+!URxvt.perl-lib:        /home/brian/conf/rxvt-unicode
+!URxvt.perl-ext-common: default,matcher!,highlight-focused
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher:     /usr/bin/firefox
+URxvt.matcher.button:  1
+URxvt.keysym.M-u:      perl:url-select:select_next
+URxvt.underlineURLs:   true
