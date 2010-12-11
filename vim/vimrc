@@ -70,6 +70,12 @@ else
   set cursorline
 endif
 
+if exists('&colorcolumn')
+  set colorcolumn=+1
+else
+  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+
 "highlight Search guifg=NONE ctermfg=NONE gui=none cterm=none
 highlight SpellBad ctermbg=17 ctermfg=15
 highlight SpellCap ctermbg=17 ctermfg=15
