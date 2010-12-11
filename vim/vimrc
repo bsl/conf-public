@@ -1,7 +1,7 @@
 set nocompatible
 set modelines=0
 set nobackup nowritebackup noswapfile viminfo=
-set notitle showmode showcmd number ruler cursorline
+set notitle showmode showcmd number ruler
 set lazyredraw
 set noerrorbells vb t_vb=
 set mouse=a " just for scroll wheel. can still do normal term copying by holding shift
@@ -62,7 +62,13 @@ set laststatus=2
 let g:obviousModeInsertHi = "term=reverse ctermfg=15 ctermbg=18"
 
 syntax on
-colorscheme jellybeans_b
+
+if &t_Co < 256
+  colorscheme fnaqevan
+else
+  colorscheme jellybeans_b
+  set cursorline
+endif
 
 "highlight Search guifg=NONE ctermfg=NONE gui=none cterm=none
 highlight SpellBad ctermbg=17 ctermfg=15
