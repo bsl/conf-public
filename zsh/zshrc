@@ -97,6 +97,7 @@ hash -d d="${HOME}/tmp/download"
 alias pwsafe='pwsafe -q'
 alias vi='vim'
 alias ls='ls --color=auto --group-directories-first'
+alias exif="gm identify -format '%[EXIF:*]'"
 
 alias -g G='|grep --color=auto'
 alias -g L='|less'
