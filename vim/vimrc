@@ -72,5 +72,7 @@ set autoindent smartindent
 set shiftwidth=2 tabstop=2 expandtab
 set nowrap
 
+set list listchars=tab:»·,trail:·
+
 highlight WSError ctermbg=52
 match WSError /\s\+$\|\t/
