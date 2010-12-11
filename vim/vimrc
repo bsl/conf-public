@@ -37,9 +37,9 @@ nmap <silent> <F12> :noh<CR>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function! BrianReplaceWord(word0, word1)
-  exec "normal" "mz"
+  let l:pos = getpos(".")
   exec "%s/\\<" . a:word0 . "\\>/" . a:word1 . "/g"
-  exec "normal" "`z"
+  call setpos('.', l:pos)
 endfunction
 
 nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
@@ -47,9 +47,9 @@ nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function! BrianRemoveTrailingWhitespace()
-  exec "normal" "mz"
+  let l:pos = getpos(".")
   exec "%s/\\s\\+$//e"
-  exec "normal" "`z"
+  call setpos('.', l:pos)
 endfunction
 
 nmap <silent> <LocalLeader>ws :call BrianRemoveTrailingWhitespace()<CR>
