@@ -1,9 +1,10 @@
 #! /bin/bash
 
-export PATH=$HOME/bin/{public,private}:$HOME/.cabal/bin
+export PATH=$HOME/bin/public:$HOME/bin/private
+export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
 export PATH=$PATH:/opt/java/bin
-export PATH=$PATH:/opt/android-sdk/{tools,platform-tools}
+export PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
 
 if [[ -z "$DISPLAY" ]] && [[ ! -a "/tmp/.X11-unix/X0" ]] && [[ $(tty) = /dev/tty1 ]]
 then
