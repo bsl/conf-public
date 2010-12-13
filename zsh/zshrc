@@ -4,9 +4,6 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-setopt vi
-bindkey -v
-
 setopt no_beep
 setopt extended_glob
 setopt always_to_end        # always go to end of word after completion
@@ -31,6 +28,17 @@ typeset -ga chpwd_functions
 REPORTTIME=4
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+setopt vi
+bindkey -v
+
+# without this, backspace refuses to delete text that isn't among the latest
+# text inserted. it's related to why we 'set backspace=indent,eol,start' in
+# vim.
+bindkey "^W" backward-kill-word    # vi-backward-kill-word
+bindkey "^H" backward-delete-char  # vi-backward-delete-char
+bindkey "^U" kill-line             # vi-kill-line
+bindkey "^?" backward-delete-char  # vi-backward-delete-char
 
 # tap jj to enter command mode
 bindkey 'jj' vi-cmd-mode
