@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export PATH=$HOME/bin:$HOME/.cabal/bin
+export PATH=$HOME/bin/{public,private}:$HOME/.cabal/bin
 export PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
 export PATH=$PATH:/opt/java/bin
 export PATH=$PATH:/opt/android-sdk/{tools,platform-tools}
