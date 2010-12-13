@@ -90,5 +90,5 @@ set nowrap
 
 let g:wserrorColor = 'ctermbg=52'
 
-autocmd FileType c,css,haskell,html,lua,mail,sh,vim,zsh WSErrorHighlight0
+autocmd FileType c,css,haskell,html,lua,mail,sh,text,vim,zsh WSErrorHighlight0
 autocmd FileType make WSErrorHighlight1
