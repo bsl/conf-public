@@ -4,7 +4,6 @@ set nobackup nowritebackup noswapfile viminfo=
 set notitle showmode showcmd number ruler
 set lazyredraw
 set noerrorbells vb t_vb=
-set mouse=a " just for scroll wheel. can still do normal term copying by holding shift
 set pastetoggle=<F11>
 set wildmenu
 set complete+=k
@@ -33,6 +32,22 @@ nmap <silent> <F6> :bp<CR>
 nmap <silent> <F7> :bn<CR>
 
 nmap <silent> <F12> :noh<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+set mouse=a " just for scroll wheel. can still do normal term copying by holding shift
+
+function! BrianToggleMouse()
+  if &mouse == 'a'
+    set mouse=
+    echo "Mouse OFF"
+  else
+    set mouse=a
+    echo "Mouse ON"
+  endif
+endfunction
+
+nmap <F12> :call BrianToggleMouse()<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
