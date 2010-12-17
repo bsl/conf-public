@@ -1,8 +1,9 @@
 set editing-mode vi
-set keymap vi-command
 "jj": "\C-["
-"_": beginning-of-line
 "\C-l": clear-screen
 "\C-d": "\C-u\C-d"
+
+set keymap vi-command
 "\C-p": history-search-backward
 "\C-n": history-search-forward
+"_": beginning-of-line
