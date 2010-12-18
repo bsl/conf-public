@@ -1,8 +1,8 @@
-set from=brian@lorf.org
+set from=brian@monetra.com
 set realname='Brian Lewis'
 
 set mbox_type=Maildir
-set folder   ="$HOME/mail/brian@lorf.org"
-set spoolfile="$HOME/mail/brian@lorf.org/INBOX"
-set record   ="$HOME/mail/brian@lorf.org/sent"
-set postponed="$HOME/mail/brian@lorf.org/postponed"
+set folder   ="$HOME/mail/brian@monetra.com"
+set spoolfile="$HOME/mail/brian@monetra.com/INBOX"
+set record   ="$HOME/mail/brian@monetra.com/sent"
+set postponed="$HOME/mail/brian@monetra.com/postponed"
