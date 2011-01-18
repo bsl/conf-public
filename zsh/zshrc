@@ -19,6 +19,9 @@ setopt hist_ignore_space
 setopt interactive_comments # allow comments in interactive shell
 setopt no_rm_star_wait      # don't idle 10 seconds
 setopt rm_star_silent
+setopt nohashdirs           # hopefully stop making me run 'rehash'
+setopt nohashcmds           # |
+
 #setopt transient_rprompt    # rprompt disappears after i hit enter
 
 typeset -ga preexec_functions
