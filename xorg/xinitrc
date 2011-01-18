@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # add font directory for terminus
 xset +fp /usr/share/fonts/local
 
