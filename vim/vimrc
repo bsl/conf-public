@@ -3,7 +3,7 @@ set modelines=0
 set nobackup nowritebackup noswapfile viminfo=
 set notitle showmode showcmd number ruler
 set lazyredraw
-set noerrorbells vb t_vb=
+set noerrorbells visualbell t_vb=
 set pastetoggle=<F11>
 set wildmenu
 set complete+=k
