@@ -6,7 +6,8 @@
   ui = auto
 
 [sendemail]
-  confirm = auto
+  confirm    = auto
+  smtpserver = /usr/bin/msmtp
 
 [core]
   excludesfile = ~/conf/public/git/gitignore_global
