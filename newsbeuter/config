@@ -14,3 +14,5 @@ reload-threads 8
 notify-beep yes # for urgency
 
 history-limit 0
+
+ignore-article "http://feeds.penny-arcade.com/pa-mainsite" "title =~ \"^News:\""
