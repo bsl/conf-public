@@ -101,6 +101,11 @@ set nowrap
 
 "set list listchars=tab:»·
 
+set cinoptions =:0  " don't indent 'case' in 'switch'
+set cinoptions+=ls  " regular alignment of {} in 'case'
+set cinoptions+=(s  " regular indentation after trailing (
+set cinoptions+=m1  " deindent closing )
+
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 let g:wserrorColor = 'ctermbg=52'
