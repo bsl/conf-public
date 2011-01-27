@@ -101,6 +101,8 @@ export VISUAL=vim
 export GEM_HOME="${HOME}/.gem"
 
 hash -d d="${HOME}/tmp/download"
+hash -d processors="${HOME}/mssw/src/monetra-trunk/processors"
+hash -d test_scripts="${HOME}/mssw/src/proc_scripts-trunk/test_scripts"
 
 alias pwsafe='pwsafe -q'
 alias vi='vim'
