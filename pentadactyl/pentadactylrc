@@ -1,0 +1,7 @@
+loadplugins '\.(js|penta)$'
+set complete=
+set autocomplete=
+set defsearch=
+set noincfind
+set private
+set history=0
