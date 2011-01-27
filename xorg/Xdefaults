@@ -2,7 +2,7 @@ URxvt*cutchars:
 URxvt*urgentOnBell: true
 
 URxvt*scrollBar: false
-URxvt*font: xft:Terminus:pixelsize=6x12:antialias=false
+URxvt*font: xft:Terminus:size=12:antialias=false
 !URxvt*cursorColor: #aece92
 !URxvt*borderless: true
 !URxvt*cursorBlink: true
