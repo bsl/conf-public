@@ -2,3 +2,4 @@ source ~/conf/public/mutt/muttrc.account
 source ~/conf/public/mutt/muttrc.settings
 source ~/conf/public/mutt/muttrc.gpg
 source ~/conf/public/mutt/muttrc.colors
+source ~/conf/public/mutt/muttrc.local
