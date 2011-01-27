@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export PATH=$HOME/bin/public:$HOME/bin/private
+export PATH=$HOME/bin/public:$HOME/bin/private:$HOME/bin/mssw
 export PATH=$PATH:$HOME/.cabal/bin
 export PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
 export PATH=$PATH:/opt/java/bin
