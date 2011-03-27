@@ -105,10 +105,12 @@ export GEM_HOME="${HOME}/.gem"
 
 hash -d d="${HOME}/tmp/download"
 
+alias beep="echo -e '\007'"
 alias pwsafe='pwsafe -q'
 alias vi='vim'
 alias ls='ls --color=auto --group-directories-first'
 alias exif="gm identify -format '%[EXIF:*]'"
+alias emulator='emulator -no-audio -no-boot-anim'
 
 alias -g G='|grep --color=auto'
 alias -g L='|less'
@@ -119,6 +121,7 @@ alias vima='vim $(find . -path "./.git" -prune -o -path "./dist" -prune -o -type
 alias space='du -s -B 1M * | sort -nr | less'
 alias hadd='cabal haddock && firefox dist/doc/html/*/index.html'
 alias ca='cabal clean && cabal configure && cabal build'
+alias jruby='/opt/jruby/bin/jruby --fast --server -J-Djruby.objectspace.enabled=false'
 
 eval $(dircolors -b)
 
@@ -168,4 +171,4 @@ zle -N zle-keymap-select
 setopt prompt_subst
 
 PROMPT='${RESET}${EXITCODE}${VIMODE} ${FG_BRIGHT_WHITE}%#${RESET} '
-RPROMPT='${RESET}${FG_BRIGHT_BLACK}[${RESET}${FG_BRIGHT_YELLOW}%20<..<%~${RESET}${FG_BRIGHT_BLACK}]${RESET}'
+RPROMPT='${RESET}${FG_BRIGHT_BLACK}[${RESET}${FG_BRIGHT_YELLOW}%40<..<%~${RESET}${FG_BRIGHT_BLACK}]${RESET}'
