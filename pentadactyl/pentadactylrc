@@ -5,3 +5,4 @@ set defsearch=
 set noincfind
 set private
 set history=0
+set visualbell
