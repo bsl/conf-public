@@ -278,7 +278,7 @@ awful.rules.rules = {
     properties = { floating = true } },
   { rule = { name = 'luakit' },
     properties = { tag = tags[1][3] } },
-  { rule = { name = 'Namoroka' },
+  { rule = { name = 'Mozilla Firefox' },
     properties = { tag = tags[1][3] } },
 }
 
