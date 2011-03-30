@@ -14,3 +14,7 @@ user_pref("browser.tabs.closeWindowWithLastTab", false);
 /* Don't prevent me from browsing to unusual ports.
  */
 user_pref("network.security.ports.banned.override", "1-65535");
+
+/* Don't animate tabs.
+ */
+user_pref("browser.tabs.animate", false);
