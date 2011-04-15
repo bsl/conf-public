@@ -1,0 +1,5 @@
+editmode: Vi
+bind: k up
+bind: j down
+
+historyDuplicates: IgnoreConsecutive
