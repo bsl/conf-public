@@ -7,6 +7,8 @@ PATH=$PATH:/opt/java/bin
 PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
 export PATH
 
+export EDITOR=/usr/bin/vim
+
 if [[ -z "$DISPLAY" ]] && [[ ! -a "/tmp/.X11-unix/X0" ]] && [[ $(tty) = /dev/tty1 ]]
 then
   (xinit -- /usr/bin/Xorg -nolisten tcp &)
