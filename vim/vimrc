@@ -14,16 +14,17 @@ filetype plugin indent on
 
 set spelllang=en
 
-let maplocalleader = "\\"
+let mapleader = ","
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-map <LocalLeader>ev :tabedit ~/.vimrc<cr>
-map <LocalLeader>sv :source ~/.vimrc<CR>
+map <leader>ev :tabedit ~/.vimrc<cr>
+map <leader>sv :source ~/.vimrc<CR>
 
 imap jj <ESC>
-nmap <silent> <LocalLeader>ww :up<CR>
-nmap <silent> <LocalLeader>ss :setlocal spell!<CR>
+imap ww <ESC>:up<CR>
+nmap <silent> <leader>ww :up<CR>
+nmap <silent> <leader>ss :setlocal spell!<CR>
 
 nmap <silent> <F1> :Explore<CR>
 nmap <silent> <F2> :Sexplore<CR>
@@ -67,7 +68,7 @@ function! BrianRemoveTrailingWhitespace()
   call setpos('.', l:pos)
 endfunction
 
-nmap <silent> <LocalLeader>ws :call BrianRemoveTrailingWhitespace()<CR>
+nmap <silent> <leader>ws :call BrianRemoveTrailingWhitespace()<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
