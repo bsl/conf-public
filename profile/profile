@@ -6,6 +6,7 @@ PATH=$PATH:$HOME/.gem/bin
 PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
 PATH=$PATH:/opt/java/bin
 PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
+PATH=$PATH:/usr/bin/core_perl
 export PATH
 
 export EDITOR=/usr/bin/vim
