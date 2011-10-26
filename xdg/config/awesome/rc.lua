@@ -76,7 +76,7 @@ vicious.register(
     return args[1]
   end,
   0,
-  'Speaker'
+  'Master'
 )
 
 vicious.force({ volumebar })
@@ -105,7 +105,7 @@ membar:set_background_color('#494b4f')
 membar:set_border_color(nil)
 membar:set_color('#aecf96')
 
-vicious.register(membar, vicious.widgets.mem, '$1', 1)
+vicious.register(membar, vicious.widgets.mem, '$1', 3)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -216,9 +216,14 @@ globalkeys = awful.util.table.join(
                                               )
                                             end),
 
-  awful.key({ modkey            }, '#117',  function () awful.util.spawnwait('increase-volume Speaker 5'); vicious.force({ volumebar }) end),  -- page down
-  awful.key({ modkey            }, '#112',  function () awful.util.spawnwait('decrease-volume Speaker 5'); vicious.force({ volumebar }) end),  -- page up
-  awful.key({ modkey            }, '#113',  function () awful.util.spawnwait('toggle-mute Speaker');       vicious.force({ volumebar }) end),  -- left
+  -- the official weird buttons
+  awful.key({                   }, '#122',  function () awful.util.spawnwait('decrease-volume Master 5'); vicious.force({ volumebar }) end),  -- page up
+  awful.key({                   }, '#123',  function () awful.util.spawnwait('increase-volume Master 5'); vicious.force({ volumebar }) end),  -- page down
+  awful.key({                   }, '#121',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),  -- left
+  -- the back/forward buttons and left arrow
+  awful.key({ modkey            }, '#166',  function () awful.util.spawnwait('decrease-volume Master 5'); vicious.force({ volumebar }) end),  -- page up
+  awful.key({ modkey            }, '#167',  function () awful.util.spawnwait('increase-volume Master 5'); vicious.force({ volumebar }) end),  -- page down
+  awful.key({ modkey            }, '#113',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),  -- left
 
   awful.key({ modkey, 'Shift'   }, 'r',     awesome.restart),
   awful.key({ modkey, 'Shift'   }, 'x',     awesome.quit)
