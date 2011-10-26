@@ -1,0 +1,9 @@
+[ui]
+username = Brian Lewis <brian@lorf.org>
+verbose = True
+
+[extensions]
+hgext.patchbomb =
+
+[email]
+method = /usr/bin/msmtp
