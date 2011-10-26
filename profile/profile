@@ -6,7 +6,7 @@ PATH=$PATH:$HOME/.gem/bin
 PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
 PATH=$PATH:/opt/java/bin
 PATH=$PATH:/opt/android-sdk/tools:/opt/android-sdk/platform-tools
-PATH=$PATH:/usr/bin/core_perl
+PATH=$PATH:/usr/bin/vendor_perl
 export PATH
 
 export EDITOR=/usr/bin/vim
@@ -17,4 +17,4 @@ then
   exit
 fi
 
-eval $(keychain --eval --nogui -q id_rsa D44C440C 9EE5312B)
+eval $(keychain --eval --nogui -q id_rsa D44C440C)
