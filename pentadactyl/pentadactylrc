@@ -6,3 +6,24 @@ set noincfind
 set private
 set history=0
 set visualbell
+
+nmap a <nop>
+nmap b <nop>
+nmap i <nop>
+nmap m <nop>
+nmap p <nop>
+nmap q <nop>
+nmap s <nop>
+nmap u <nop>
+nmap w <nop>
+nmap z <nop>
+
+nmap A <nop>
+nmap B <nop>
+nmap N <nop>
+nmap S <nop>
+nmap W <nop>
+nmap Y <nop>
+nmap Z <nop>
+
+map <C-t> :tabopen<CR>
