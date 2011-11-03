@@ -20,7 +20,6 @@ nmap z <nop>
 
 nmap A <nop>
 nmap B <nop>
-nmap N <nop>
 nmap S <nop>
 nmap W <nop>
 nmap Y <nop>
