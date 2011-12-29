@@ -2,7 +2,7 @@ URxvt*cutchars:
 URxvt*urgentOnBell: true
 
 URxvt*scrollBar: false
-URxvt*font: xft:Terminus:pixelsize=6x12:antialias=false
+URxvt*font: xft:Terminus:size=8:antialias=false,xft:Microsoft Yahei:size=8
 !URxvt*cursorColor: #aece92
 !URxvt*borderless: true
 !URxvt*cursorBlink: true
@@ -27,14 +27,12 @@ URxvt*color13: #cf9ebe
 URxvt*color14: #71bebe
 URxvt*color15: #ffffff
 
-URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus:pixelsize=6x12, xft:Microsoft Yahei:size=16\007
-URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=16, xft:Microsoft Yahei:size=16\007
-URxvt.keysym.Mod4-F3: command:\033]50;xft:Terminus:size=24, xft:Microsoft Yahei:size=16\007
+URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus:size=8,  xft:Microsoft Yahei\007
+URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=16, xft:Microsoft Yahei\007
+URxvt.keysym.Mod4-F3: command:\033]50;xft:Terminus:size=24, xft:Microsoft Yahei\007
 
-!URxvt.perl-lib:        /home/brian/conf/rxvt-unicode
 !URxvt.perl-ext-common: default,matcher!,highlight-focused
 URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher:     /usr/bin/firefox
 URxvt.matcher.button:  1
-URxvt.keysym.M-u:      perl:url-select:select_next
 URxvt.underlineURLs:   true
