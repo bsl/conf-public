@@ -281,6 +281,8 @@ awful.rules.rules = {
                    buttons      = clientbuttons } },
   { rule = { class = 'MPlayer' },
     properties = { floating = true } },
+  { rule = { class = 'vncviewer' },
+    properties = { floating = true } },
   { rule = { name = 'luakit' },
     properties = { tag = tags[1][3] } },
   { rule = { name = 'Mozilla Firefox' },
