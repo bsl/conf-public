@@ -113,3 +113,8 @@ let g:wserrorColor = 'ctermbg=52'
 
 autocmd FileType c,css,haskell,html,java,lua,mail,ruby,sh,text,vim,xml,zsh WSErrorHighlight0
 autocmd FileType make WSErrorHighlight1
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
