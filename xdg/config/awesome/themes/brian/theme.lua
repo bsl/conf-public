@@ -2,6 +2,8 @@ local root = os.getenv('HOME') .. '/.config/awesome/themes/brian'
 
 theme = {}
 
+theme.wallpaper_cmd = {}
+
 theme.font          = 'Terminus 8'
 
 theme.bg_normal     = '#222222'
