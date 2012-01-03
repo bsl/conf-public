@@ -289,6 +289,8 @@ awful.rules.rules = {
     properties = { tag = tags[1][3] } },
   { rule = { name = 'New Tab - Chromium' },
     properties = { tag = tags[1][4] } },
+  { rule = { name = 'Aurora' },
+    properties = { tag = tags[1][5] } },
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
