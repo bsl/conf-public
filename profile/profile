@@ -11,6 +11,9 @@ export PATH
 
 export EDITOR=/usr/bin/vim
 
+# for gnupg.vim
+export GPG_TTY=`tty`
+
 if [[ -z "$DISPLAY" ]] && [[ ! -a "/tmp/.X11-unix/X0" ]] && [[ $(tty) = /dev/tty1 ]]
 then
   (xinit -- /usr/bin/Xorg -nolisten tcp &)
