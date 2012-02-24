@@ -10,6 +10,21 @@ set complete+=k
 set backspace=indent,eol,start
 set encoding=utf8
 
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-surround'
+Bundle 'Align'
+Bundle 'gnupg.vim'
+Bundle 'localvimrc'
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 filetype plugin indent on
 
 set spelllang=en
