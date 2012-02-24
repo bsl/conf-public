@@ -11,12 +11,12 @@ xsetroot -solid '#0f0f0f'
 
 urxvtd -q -f -o
 
-if which scim > /dev/null
+if which ibus-daemon > /dev/null
 then
-  export XMODIFIERS='@im=SCIM'
-  export GTK_IM_MODULE='scim'
-  export QT_IM_MODULE='scim'
-  scim -d
+  export GTK_IM_MODULE='ibus'
+  export QT_IM_MODULE='ibus'
+  export XMODIFIERS='@im=ibus'
+  ibus-daemon -x -d
 fi
 
 if which dbus-launch > /dev/null && [ -z "$DBUS_SESSION_BUS_ADDRESS" ]
