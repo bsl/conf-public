@@ -279,6 +279,8 @@ awful.rules.rules = {
                    focus        = true,
                    keys         = clientkeys,
                    buttons      = clientbuttons } },
+  { rule = { class = 'Audacity' },
+    properties = { floating = true } },
   { rule = { class = 'MPlayer' },
     properties = { floating = true } },
   { rule = { class = 'vncviewer' },
