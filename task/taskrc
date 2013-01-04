@@ -1,15 +1,15 @@
 data.location=/home/brian/.task
 
-include /usr/share/doc/task/rc/dark-yellow-green.theme
+#include /usr/share/doc/task/rc/dark-yellow-green.theme
 
 dateformat=Y-M-D
 dateformat.report=Y-M-D
 dateformat.annotation=Y-M-D
 
-report.list-brian.description=b report
-report.list-brian.columns=id,due,description,tags
-report.list-brian.sort=due+,tags+,id+
-report.list-brian.labels=ID,Due,Description,Tags
-report.list-brian.filter=status:pending
-
-default.command=list-brian
+#report.list-brian.description=b report
+#report.list-brian.columns=id,due,description,tags
+#report.list-brian.sort=due+,tags+,id+
+#report.list-brian.labels=ID,Due,Description,Tags
+#report.list-brian.filter=status:pending
+#
+#default.command=list-brian
