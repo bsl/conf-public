@@ -1,4 +1,4 @@
-URxvt*cutchars:
+URxvt*cutchars: │
 URxvt*urgentOnBell: true
 
 URxvt*scrollBar: false
@@ -36,3 +36,5 @@ URxvt.keysym.Mod4-F3: command:\033]50;xft:Terminus:size=24, xft:Microsoft Yahei\
 !URxvt.urlLauncher:     /usr/bin/firefox
 !URxvt.matcher.button:  1
 !URxvt.underlineURLs:   false
+
+Xcursor.theme: Neutral
