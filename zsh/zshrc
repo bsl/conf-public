@@ -44,10 +44,12 @@ bindkey "^U" backward-kill-line    # vi-kill-line
 bindkey "^?" backward-delete-char  # vi-backward-delete-char
 
 # tap jj to enter command mode
-bindkey 'jj' vi-cmd-mode
+bindkey -M viins 'jj' vi-cmd-mode
 
 # make _ act like vim
 bindkey -M vicmd '_' vi-beginning-of-line
+
+bindkey '^R' history-incremental-search-backward
 
 # make C-d exit even if the line isn't empty
 really_exit () {
@@ -63,9 +65,9 @@ bindkey "" really_exit
 #zle -N clear2
 #bindkey "" clear2
 
-# C-l -> clear
-bindkey '^[p' push-input
-bindkey -s "^L" "^[pclear\n"
+## C-l -> clear
+#bindkey '^[p' push-input
+#bindkey -s "^L" "^[pclear\n"
 
 # C-k -> cd ..
 cd_up () {
@@ -101,7 +103,7 @@ export GREP_OPTIONS='--color=auto'
 export GREP_COLOR='01;33'
 export VISUAL=vim
 
-export GEM_HOME="${HOME}/.gem"
+#export GEM_HOME="${HOME}/.gem"
 
 hash -d d="${HOME}/tmp/download"
 
@@ -111,7 +113,8 @@ alias vi='vim'
 alias ls='ls --color=auto --group-directories-first'
 alias exif="gm identify -format '%[EXIF:*]'"
 alias emulator='emulator -no-audio -no-boot-anim'
-alias pacman='pacman-color'
+alias rhino='java -jar /usr/share/java/js.jar'
+#alias pacman='pacman-color'
 
 alias -g G='|grep --color=auto'
 alias -g L='|less'
@@ -123,6 +126,8 @@ alias space='du -s -B 1M * | sort -nr | less'
 alias hadd='cabal haddock && firefox dist/doc/html/*/index.html'
 alias ca='cabal clean && cabal configure && cabal build'
 alias jruby='/opt/jruby/bin/jruby --fast --server -J-Djruby.objectspace.enabled=false'
+
+alias -s pdf=evince
 
 eval $(dircolors -b)
 
