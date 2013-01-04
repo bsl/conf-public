@@ -2,13 +2,15 @@ set nocompatible
 set modelines=0
 set nobackup nowritebackup noswapfile viminfo=
 set notitle showmode showcmd number ruler
-set lazyredraw
+" set lazyredraw
 set noerrorbells visualbell t_vb=
 set pastetoggle=<F11>
 set wildmenu
 set complete+=k
 set backspace=indent,eol,start
 set encoding=utf8
+set ttyfast
+set ttymouse=xterm2
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -17,11 +19,30 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-surround'
 Bundle 'Align'
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'gnupg.vim'
 Bundle 'localvimrc'
+Bundle 'tpope/vim-afterimage'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'vimwiki'
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" function! VimwikiLinkHandler(link)
+"   try
+"     execute 'silent !xdg-open '.a:link
+"     return 1
+"   catch
+"     echo 'Error opening URL!'
+"   endtry
+"   return 0
+" endfunction
+
+let g:vimwiki_list = [{'path': '~/data/vimwiki'}]
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -37,8 +58,6 @@ map <leader>ev :tabedit ~/.vimrc<cr>
 map <leader>sv :source ~/.vimrc<CR>
 
 imap jj <ESC>
-imap ww <ESC>:up<CR>
-nmap <silent> <leader>ww :up<CR>
 nmap <silent> <leader>ss :setlocal spell!<CR>
 
 nmap <silent> <F1> :Explore<CR>
@@ -75,6 +94,14 @@ endfunction
 
 nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
 
+function! BrianWinDoReplaceWord(word0, word1)
+  let l:pos = getpos(".")
+  exec "windo %s/\\<" . a:word0 . "\\>/" . a:word1 . "/g"
+  call setpos('.', l:pos)
+endfunction
+
+nmap <F5> :call BrianWinDoReplaceWord("<C-r><C-w>", "")<Left><Left>
+
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 function! BrianRemoveTrailingWhitespace()
@@ -83,7 +110,40 @@ function! BrianRemoveTrailingWhitespace()
   call setpos('.', l:pos)
 endfunction
 
-nmap <silent> <leader>ws :call BrianRemoveTrailingWhitespace()<CR>
+" XXX conflicts with vimwiki
+" nmap <silent> <leader>ws :call BrianRemoveTrailingWhitespace()<CR>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" nnoremap <silent> <F10> :call <SID>SearchMode()<CR>
+" function s:SearchMode()
+"   if !exists('s:searchmode') || s:searchmode == 0
+"     echo 'Search next: scroll hit to middle if not on same page'
+"     nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>
+"     nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>
+"     let s:searchmode = 1
+"   elseif s:searchmode == 1
+"     echo 'Search next: scroll hit to middle'
+"     nnoremap n nzz
+"     nnoremap N Nzz
+"     let s:searchmode = 2
+"   else
+"     echo 'Search next: normal'
+"     nunmap n
+"     nunmap N
+"     let s:searchmode = 0
+"   endif
+" endfunction
+
+" " If cursor is in first or last line of window, scroll to middle line.
+" function s:MaybeMiddle()
+"   if winline() == 1 || winline() == winheight(0)
+"     normal! zz
+"   endif
+" endfunction
+
+nmap n nzz
+nmap p pzz
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -126,7 +186,7 @@ set cinoptions+=m1  " deindent closing )
 
 let g:wserrorColor = 'ctermbg=52'
 
-autocmd FileType c,css,haskell,html,java,lua,mail,ruby,sh,text,vim,xml,zsh WSErrorHighlight0
+autocmd FileType c,css,haskell,html,java,javascript,lua,mail,ruby,sh,text,vim,xml,zsh WSErrorHighlight0
 autocmd FileType make WSErrorHighlight1
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
