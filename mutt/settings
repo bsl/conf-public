@@ -13,13 +13,18 @@ set beep_new=yes                        # beep when new mail arrives
 set date_format="%Y.%m.%d, at %H:%M"
 set attribution="On %d, %n wrote:"
 set menu_scroll=yes
-set pager_index_lines=6
+set pager_index_lines=10
 set pager_stop=yes
 set fast_reply=yes                      # do not ask for to: or subject: on reply
 
+set alias_file="~/conf/private/mutt/aliases"
+set sort_alias=alias
+set reverse_alias=yes
+source $alias_file
+
 ignore *
-unignore date: from: to: subject: cc: user-agent: x-mailer:
-hdr_order date: from: to: subject: cc: user-agent: x-mailer:
+unignore date: from: reply-to: to: subject: cc: user-agent: x-mailer: x-pgp-key:
+hdr_order date: from: reply-to: to: subject: cc: user-agent: x-mailer: x-pgp-key:
 
 # - - - - - - - - - - - - - - - - - - - -
 

@@ -1,0 +1,9 @@
+set from='Brian Lewis <brian@lorf.org>'
+set use_from=yes
+set realname='Brian Lewis'
+
+set mbox_type=Maildir
+set folder   ="~/mail/brian@lorf.org"
+set spoolfile="~/mail/brian@lorf.org/INBOX"
+set record   ="~/mail/brian@lorf.org/sent"
+set postponed="~/mail/brian@lorf.org/postponed"

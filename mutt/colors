@@ -20,7 +20,7 @@ color index      black        green   ~T
 color index      brightwhite  black   ~D
 
 # URLs
-color body brightblue black "(http|ftp|news|telnet|finger)://[^ \"\t\r\n]*"
+color body brightblue black "(http|https)://[^ \"\t\r\n]*"
 color body brightblue black "mailto:[-a-z_0-9.]+@[-a-z_0-9.]+"
 
 # email addresses

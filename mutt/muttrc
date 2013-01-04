@@ -1,5 +1,6 @@
-source ~/conf/public/mutt/muttrc.account
-source ~/conf/public/mutt/muttrc.settings
-source ~/conf/public/mutt/muttrc.gpg
-source ~/conf/public/mutt/muttrc.colors
-source ~/conf/public/mutt/muttrc.local
+source ~/conf/public/mutt/account
+source ~/conf/public/mutt/settings
+source ~/conf/public/mutt/crypto
+source ~/conf/private/mutt/crypto.special_recipients
+source ~/conf/public/mutt/colors
+source ~/conf/public/mutt/local
