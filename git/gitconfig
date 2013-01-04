@@ -11,3 +11,5 @@
 
 [core]
   excludesfile = ~/conf/public/git/gitignore_global
+[push]
+  default = simple
