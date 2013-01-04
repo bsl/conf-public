@@ -3,10 +3,10 @@ set complete=
 set autocomplete=
 set defsearch=
 set noincfind
-set private
 set history=0
 set visualbell
 
+nmap . <nop>
 nmap a <nop>
 nmap b <nop>
 nmap i <nop>
@@ -26,3 +26,8 @@ nmap Y <nop>
 nmap Z <nop>
 
 map <C-t> :tabopen<CR>
+map <esc> :stop<CR>
+map <f2> :dialog console<CR>
+map L gt
+map H gT
+map P :pintab<CR>
