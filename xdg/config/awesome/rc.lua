@@ -117,7 +117,7 @@ cpugraph:set_width(16)
 cpugraph:set_background_color('#494b4f')
 cpugraph:set_color('#ff5656')
 
-vicious.register(cpugraph, vicious.widgets.cpu, "$1", 0.5)
+vicious.register(cpugraph, vicious.widgets.cpu, "$1", 1)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
