@@ -1,5 +1,5 @@
 set editor="vim"
-set user_agent=no                       # don't advertise
+set user_agent=no                       # do not advertise
 set move=no                             # do not ask about moving read messages from spool mailbox to mbox
 set timeout=5                           # number of seconds to wait for keypress in main menu before checking for new mail
 set mail_check=5                        # number of seconds before checking for new mail
@@ -16,6 +16,7 @@ set menu_scroll=yes
 set pager_index_lines=10
 set pager_stop=yes
 set fast_reply=yes                      # do not ask for to: or subject: on reply
+#set mask="!^\.\.$"                      # do not show .. in folder list
 
 set alias_file="~/conf/private/mutt/aliases"
 set sort_alias=alias
@@ -43,3 +44,23 @@ bind pager   j   next-line
 bind pager   k   previous-line
 bind pager   \Cd next-page
 bind pager   \Cu previous-page
+
+macro index c "<change-folder>?" "open a different folder"
+macro pager c "<change-folder>?" "open a different folder"
+
+# - - - - - - - - - - - - - - - - - - - -
+
+set my_spamaddr = "spam-brian@lorf.org"
+set my_hamaddr = "notspam-brian@lorf.org"
+
+set my_mime_forward = $mime_forward
+set my_copy = $copy
+set my_weed = $weed
+set my_resolve = $resolve
+set my_editor = $editor
+
+# tip: add a space before commands so that they are not saved in commands history
+macro index X "<enter-command> set copy=no mime_forward=yes weed=no resolve=no editor='/bin/true'<enter><tag-prefix><clear-flag>N<tag-prefix><forward-message>$my_spamaddr<enter><send-message><tag-prefix><delete-message><enter-command> set copy=$my_copy mime_forward=$my_mime_forward weed=$my_weed resolve=$my_resolve editor='$my_editor'<enter><next-entry>" "Mark as spam"
+macro pager X "<enter-command> set copy=no mime_forward=yes weed=no resolve=no editor='/bin/true'<enter><clear-flag>N<forward-message>$my_spamaddr<enter><send-message><delete-message><enter-command> set copy=$my_copy mime_forward=$my_mime_forward weed=$my_weed resolve=$my_resolve editor='$my_editor'<enter><next-entry>" "Mark as spam"
+macro index H "<enter-command> set copy=no mime_forward=yes weed=no resolve=no editor='/bin/true'<enter><tag-prefix><clear-flag>N<tag-prefix><forward-message>$my_hamaddr<enter><send-message><enter-command> set copy=$my_copy mime_forward=$my_mime_forward weed=$my_weed resolve=$my_resolve editor='$my_editor'<enter><tag-prefix><save-message>=INBOX\n<enter><next-entry>" "Mark as ham and move to INBOX"
+macro pager H "<enter-command> set copy=no mime_forward=yes weed=no resolve=no editor='/bin/true'<enter><clear-flag>N<forward-message>$my_hamaddr<enter><send-message><enter-command> set copy=$my_copy mime_forward=$my_mime_forward weed=$my_weed resolve=$my_resolve editor='$my_editor'<enter><save-message>=INBOX\n<enter><next-entry>" "Mark as ham and move to INBOX"
