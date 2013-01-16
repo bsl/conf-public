@@ -19,4 +19,4 @@ then
   exit
 fi
 
-eval $(keychain --eval --nogui -q id_rsa) # D44C440C)
+eval $(keychain --eval --nogui -q id_rsa D44C440C)
