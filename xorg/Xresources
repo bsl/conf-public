@@ -1,4 +1,4 @@
-URxvt*cutchars: │
+URxvt*cutchars: BACKSLASH '"'&()*,;<=>?@[]{|}
 URxvt*urgentOnBell: true
 
 URxvt*scrollBar: false
