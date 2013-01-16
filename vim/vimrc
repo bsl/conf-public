@@ -11,6 +11,7 @@ set backspace=indent,eol,start
 set encoding=utf8
 set ttyfast
 set ttymouse=xterm2
+set nojoinspaces
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -29,6 +30,8 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'vimwiki'
+Bundle 'ShowTrailingWhitespace'
+Bundle 'DeleteTrailingWhitespace'
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -48,11 +51,9 @@ let g:vimwiki_list = [{'path': '~/data/vimwiki'}]
 
 filetype plugin indent on
 
-set spelllang=en
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 let mapleader = ","
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 map <leader>ev :tabedit ~/.vimrc<cr>
 map <leader>sv :source ~/.vimrc<CR>
@@ -94,56 +95,31 @@ endfunction
 
 nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
 
-function! BrianWinDoReplaceWord(word0, word1)
-  let l:pos = getpos(".")
-  exec "windo %s/\\<" . a:word0 . "\\>/" . a:word1 . "/g"
-  call setpos('.', l:pos)
-endfunction
-
-nmap <F5> :call BrianWinDoReplaceWord("<C-r><C-w>", "")<Left><Left>
-
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-function! BrianRemoveTrailingWhitespace()
-  let l:pos = getpos(".")
-  exec "%s/\\s\\+$//e"
-  call setpos('.', l:pos)
-endfunction
+" function! BrianRemoveTrailingWhitespace()
+"   let l:pos = getpos(".")
+"   exec "%s/\\s\\+$//e"
+"   call setpos('.', l:pos)
+" endfunction
 
 " XXX conflicts with vimwiki
 " nmap <silent> <leader>ws :call BrianRemoveTrailingWhitespace()<CR>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" nnoremap <silent> <F10> :call <SID>SearchMode()<CR>
-" function s:SearchMode()
-"   if !exists('s:searchmode') || s:searchmode == 0
-"     echo 'Search next: scroll hit to middle if not on same page'
-"     nnoremap <silent> n n:call <SID>MaybeMiddle()<CR>
-"     nnoremap <silent> N N:call <SID>MaybeMiddle()<CR>
-"     let s:searchmode = 1
-"   elseif s:searchmode == 1
-"     echo 'Search next: scroll hit to middle'
-"     nnoremap n nzz
-"     nnoremap N Nzz
-"     let s:searchmode = 2
-"   else
-"     echo 'Search next: normal'
-"     nunmap n
-"     nunmap N
-"     let s:searchmode = 0
-"   endif
-" endfunction
+" keep cursor in place when joining lines with J
+nnoremap J mzJ`z
 
-" " If cursor is in first or last line of window, scroll to middle line.
-" function s:MaybeMiddle()
-"   if winline() == 1 || winline() == winheight(0)
-"     normal! zz
-"   endif
-" endfunction
+" center window automatically after jumps
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap } }zz
+nnoremap { {zz
 
-nmap n nzz
-nmap p pzz
+nnoremap <F1> <nop>
+nnoremap Q <nop>
+nnoremap K <nop>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -163,9 +139,11 @@ endif
 
 if exists('&colorcolumn')
   set colorcolumn=+1
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+" else
+"   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+set spelllang=en
 
 "highlight Search guifg=NONE ctermfg=NONE gui=none cterm=none
 highlight SpellBad ctermbg=17 ctermfg=15
@@ -175,7 +153,7 @@ set autoindent smartindent
 set shiftwidth=2 tabstop=2 expandtab
 set nowrap
 
-"set list listchars=tab:»·
+set list listchars=tab:»·,trail:·
 
 set cinoptions =:0  " don't indent 'case' in 'switch'
 set cinoptions+=ls  " regular alignment of {} in 'case'
@@ -184,12 +162,16 @@ set cinoptions+=m1  " deindent closing )
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-let g:wserrorColor = 'ctermbg=52'
+" Resize splits when the window is resized
+au VimResized * exe "normal! \<c-w>="
 
-autocmd FileType c,css,haskell,html,java,javascript,lua,mail,ruby,sh,text,vim,xml,zsh WSErrorHighlight0
-autocmd FileType make WSErrorHighlight1
+set splitbelow splitright
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" Resize splits when the window is resized
-au VimResized * exe "normal! \<c-w>="
+highlight ShowTrailingWhitespace ctermbg=red
+let g:ShowTrailingWhitespace = 1
+
+let g:DeleteTrailingWhitespace = 0
+nnoremap <Leader>d$ :<C-u>%DeleteTrailingWhitespace<CR>
+vnoremap <Leader>d$ :DeleteTrailingWhitespace<CR>
