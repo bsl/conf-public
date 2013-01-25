@@ -2,7 +2,7 @@ local awful = require('awful')
 
 theme = {}
 
-theme.font          = 'Terminus 8'
+theme.font          = 'Terminus'
 
 theme.bg_normal     = '#222222'
 theme.bg_focus      = '#535d6c'
