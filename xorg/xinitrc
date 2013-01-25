@@ -1,5 +1,16 @@
+# source scripts in /etc/X11/xinit/xinitrc.d/
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
+[[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+
 # add font directory for terminus
 xset +fp /usr/share/fonts/local
+xset fp rehash
 
 # speed up keyboard repeat
 xset r rate 200 50
@@ -9,30 +20,16 @@ setxkbmap -option ctrl:nocaps
 
 disable-screen-blanking
 
-# xsetroot -cursor_name left_ptr
 xsetroot -solid '#0f0f0f'
+
+export XMODIFIERS="@im=SCIM"
+export GTK_IM_MODULE="scim"
+export QT_IM_MODULE="scim"
+scim -d
 
 urxvtd -q -f -o
 
-if which ibus-daemon > /dev/null
-then
-  export GTK_IM_MODULE='ibus'
-  export QT_IM_MODULE='ibus'
-  export XMODIFIERS='@im=ibus'
-  ibus-daemon -x -d
-fi
-
-# Source scripts in /etc/X11/xinit/xinitrc.d/
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-  done
-  unset f
-fi
-
-# if which dbus-launch > /dev/null && [ -z "$DBUS_SESSION_BUS_ADDRESS" ]
-# then
-#   eval "$(dbus-launch --sh-syntax --exit-with-session)"
-# fi
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
 
 exec awesome
