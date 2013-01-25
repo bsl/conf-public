@@ -1,53 +1,19 @@
 set nocompatible
-set modelines=0
 set nobackup nowritebackup noswapfile viminfo=
 set notitle showmode showcmd number ruler
-" set lazyredraw
 set noerrorbells visualbell t_vb=
-set pastetoggle=<F11>
-set wildmenu
-set complete+=k
+"set ttyfast lazyredraw
+set wildmenu complete+=k
 set backspace=indent,eol,start
-set encoding=utf8
-set ttyfast
-set ttymouse=xterm2
+set encoding=utf-8
 set nojoinspaces
+set nomodeline
 
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+set ttymouse=xterm2
+set mouse=a " for scroll wheel. do normal term copying by holding shift
+set clipboard=unnamed
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-Bundle 'gmarik/vundle'
-
-Bundle 'Align'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'gnupg.vim'
-Bundle 'localvimrc'
-Bundle 'tpope/vim-afterimage'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'vimwiki'
-Bundle 'ShowTrailingWhitespace'
-Bundle 'DeleteTrailingWhitespace'
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-" function! VimwikiLinkHandler(link)
-"   try
-"     execute 'silent !xdg-open '.a:link
-"     return 1
-"   catch
-"     echo 'Error opening URL!'
-"   endtry
-"   return 0
-" endfunction
-
-let g:vimwiki_list = [{'path': '~/data/vimwiki'}]
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+set guioptions=aegirLt
 
 filetype plugin indent on
 
@@ -55,56 +21,31 @@ filetype plugin indent on
 
 let mapleader = ","
 
-map <leader>ev :tabedit ~/.vimrc<cr>
-map <leader>sv :source ~/.vimrc<CR>
+imap jj <esc>
 
-imap jj <ESC>
-nmap <silent> <leader>ss :setlocal spell!<CR>
+nmap <leader>ww :w<cr>
 
-nmap <silent> <F1> :Explore<CR>
-nmap <silent> <F2> :Sexplore<CR>
+map <leader>sv :source ~/.vimrc<cr>
 
-nmap <silent> <F6> :bp<CR>
-nmap <silent> <F7> :bn<CR>
-
-nmap <silent> <F12> :noh<CR>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-set mouse=a " just for scroll wheel. can still do normal term copying by holding shift
-
-function! BrianToggleMouse()
-  if &mouse == 'a'
-    set mouse=
-    echo "Mouse OFF"
-  else
-    set mouse=a
-    echo "Mouse ON"
-  endif
-endfunction
-
-nmap <F12> :call BrianToggleMouse()<CR>
-
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+nmap <silent> <f2> :Sexplore<cr>
 
 function! BrianReplaceWord(word0, word1)
   let l:pos = getpos(".")
   exec "%s/\\<" . a:word0 . "\\>/" . a:word1 . "/g"
   call setpos('.', l:pos)
 endfunction
+nmap <f4> :call BrianReplaceWord("<c-r><c-w>", "")<Left><Left>
 
-nmap <F4> :call BrianReplaceWord("<C-r><C-w>", "")<Left><Left>
+nmap <silent> <f6> :bp<cr>
+nmap <silent> <f7> :bn<cr>
+nmap <silent> <f8> :bd<cr>
 
-" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+" nice pasting from clipboard
+imap <leader>v <c-o>mz<c-o>:set paste<cr><c-r>*<c-o>:set nopaste<cr><c-o>`z
+nmap <leader>v mz:set paste<cr>"*P:set nopaste<cr>`z
 
-" function! BrianRemoveTrailingWhitespace()
-"   let l:pos = getpos(".")
-"   exec "%s/\\s\\+$//e"
-"   call setpos('.', l:pos)
-" endfunction
-
-" XXX conflicts with vimwiki
-" nmap <silent> <leader>ws :call BrianRemoveTrailingWhitespace()<CR>
+nmap <silent> <leader>ss :setlocal spell!<cr>
+set spelllang=en
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -117,33 +58,18 @@ nnoremap N Nzz
 nnoremap } }zz
 nnoremap { {zz
 
-nnoremap <F1> <nop>
-nnoremap Q <nop>
-nnoremap K <nop>
+nnoremap <f1> <nop>
+nnoremap Q    <nop>
+nnoremap K    <nop>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 let g:netrw_list_hide = "^\\..*$"
 
 set laststatus=2
-let g:obviousModeInsertHi = "term=reverse ctermfg=15 ctermbg=18"
+" let g:obviousModeInsertHi = 'term=reverse ctermfg=15 ctermbg=18'
 
 syntax on
-
-if &t_Co < 256
-  colorscheme fnaqevan
-else
-  colorscheme jellybeans_b
-  set cursorline
-endif
-
-if exists('&colorcolumn')
-  set colorcolumn=+1
-" else
-"   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
-set spelllang=en
 
 "highlight Search guifg=NONE ctermfg=NONE gui=none cterm=none
 highlight SpellBad ctermbg=17 ctermfg=15
@@ -162,16 +88,64 @@ set cinoptions+=m1  " deindent closing )
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-" Resize splits when the window is resized
+" auto-resize splits window is resized
 au VimResized * exe "normal! \<c-w>="
 
 set splitbelow splitright
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-highlight ShowTrailingWhitespace ctermbg=red
+highlight ShowTrailingWhitespace ctermbg=darkred
 let g:ShowTrailingWhitespace = 1
 
 let g:DeleteTrailingWhitespace = 0
-nnoremap <Leader>d$ :<C-u>%DeleteTrailingWhitespace<CR>
-vnoremap <Leader>d$ :DeleteTrailingWhitespace<CR>
+nnoremap <leader>d$ :<c-u>%DeleteTrailingWhitespace<cr>
+vnoremap <leader>d$ :DeleteTrailingWhitespace<cr>
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+" use <leader>W instead of <leader>w
+nmap <leader>W          <plug>VimwikiIndex
+nmap <leader>Wt         <plug>VimwikiTabIndex
+nmap <leader>Ws         <plug>VimwikiUISelect
+nmap <leader>Wi         <plug>VimwikiDiaryIndex
+nmap <leader>W<leader>i <plug>VimwikiDiaryGenerateLinks
+nmap <leader>W<leader>t <plug>VimwikiTabMakeDiaryNote
+nmap <leader>W<leader>w <plug>VimwikiMakeDiaryNote
+
+let g:vimwiki_list = [{'path': '~/data/vimwiki'}]
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'Align'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/powerline'
+Bundle 'gnupg.vim'
+Bundle 'localvimrc'
+Bundle 'tpope/vim-afterimage'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'vimwiki'
+Bundle 'ShowTrailingWhitespace'
+Bundle 'DeleteTrailingWhitespace'
+Bundle 'ctrlp.vim'
+Bundle 'phd'
+Bundle 'jellybeans.vim'
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+source ~/.vim/bundle/powerline/powerline/bindings/vim/plugin/source_plugin.vim
+
+colorscheme jellybeans
+
+if exists('&colorcolumn')
+  set colorcolumn=+1
+  hi ColorColumn ctermbg=darkred guibg=darkred
+endif
