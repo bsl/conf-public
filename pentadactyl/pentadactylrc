@@ -28,6 +28,9 @@ nmap Z <nop>
 map <C-t> :tabopen<CR>
 map <esc> :stop<CR>
 map <f2> :dialog console<CR>
-map L gt
-map H gT
+map <C-l> gt
+map <C-h> gT
 map P :pintab<CR>
+
+hi FontFixed -a font: 16px "Terminus"; font-weight: bold; !important;
+hi FontCode -a font: 16px "Terminus"; font-weight: bold; !important;
