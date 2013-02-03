@@ -1,0 +1,5 @@
+set noautocomplete
+
+map d dc
+map <C-l> gt
+map <C-h> gT
