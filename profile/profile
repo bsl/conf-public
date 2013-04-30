@@ -2,7 +2,6 @@
 
 PATH=$HOME/bin/public:$HOME/bin/private
 PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
-PATH=$PATH:/usr/bin/vendor_perl  # for ack(1)
 PATH=$PATH:$HOME/.cabal/bin
 PATH=$PATH:$HOME/.npm/bin
 PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
@@ -10,13 +9,13 @@ export PATH
 
 export EDITOR=/usr/bin/vim
 
-# for gnupg.vim
-export GPG_TTY=$(tty)
-
 if [[ -z "$DISPLAY" ]] && [[ ! -a "/tmp/.X11-unix/X0" ]] && [[ $(tty) = /dev/tty1 ]]
 then
-  (xinit -- /usr/bin/Xorg -nolisten tcp &)
-  exit
+  if [ -z "$XDG_VTNR" ]
+  then
+    exec xinit -- /usr/bin/Xorg -nolisten tcp
+  fi
+  exec xinit -- /usr/bin/Xorg -nolisten tcp vt$XDG_VTNR
 fi
 
-eval $(keychain --eval --nogui -q id_rsa D44C440C)
+eval $(keychain --eval --nogui -q id_rsa)
