@@ -20,10 +20,10 @@ local wiboxheight = 20
 local layouts =
 {
   awful.layout.suit.max,
-  awful.layout.suit.tile,
-  -- awful.layout.suit.tile.left,
+  awful.layout.suit.tile.left,
+  awful.layout.suit.tile.top
+  -- awful.layout.suit.tile,
   -- awful.layout.suit.tile.bottom,
-  -- awful.layout.suit.tile.top
 }
 
 local tags = {
@@ -46,17 +46,16 @@ function num(s) return wrap(s, 'darkgray')  end
 function let(s) return wrap(s, 'lightblue') end
 function sym(s) return wrap(s, '#606060')   end
 
-awful.util.spawnwait =
-  function (cmd)
-    awful.util.pread(cmd)
-  end
+awful.util.spawnwait = function (cmd)
+  awful.util.pread(cmd)
+end
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local space = wibox.widget.textbox()
 space:set_text(' ')
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local volumebar = awful.widget.progressbar()
 volumebar:set_width(4)
@@ -83,21 +82,21 @@ vicious.register(
 
 vicious.force({ volumebar })
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local timebox = wibox.widget.textbox()
-local format = num('%H') .. sym(':') .. num('%M') .. sym(':') .. num('%S')
+local format = num('%H') .. sym(':') .. num('%M') -- .. sym(':') .. num('%S')
 
-vicious.register(timebox, vicious.widgets.date, format, 1)
+vicious.register(timebox, vicious.widgets.date, format, 61)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local datebox = wibox.widget.textbox()
 local format = num('%Y') .. ' ' .. num('%m') .. sym('/') .. let('%b') .. ' ' .. num('%d') .. sym('/') .. let('%a')
 
 vicious.register(datebox, vicious.widgets.date, format, 61)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local membar = awful.widget.progressbar()
 membar:set_width(4)
@@ -109,7 +108,7 @@ membar:set_color('#aecf96')
 
 vicious.register(membar, vicious.widgets.mem, '$1', 3)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local cpugraph = awful.widget.graph()
 cpugraph:set_width(16)
@@ -119,7 +118,7 @@ cpugraph:set_color('#ff5656')
 
 vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local batterybar = awful.widget.progressbar()
 batterybar:set_width(4)
@@ -147,7 +146,7 @@ vicious.register(
   'BAT0'
 )
 
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local mywibox   = {}
 local mytaglist = {}
@@ -206,8 +205,10 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey, 'Control' }, 'h',     function () awful.client.swap.bydirection('left')  end),
   awful.key({ modkey, 'Control' }, 'l',     function () awful.client.swap.bydirection('right') end),
 
-  awful.key({ modkey, 'Shift'   }, 'l',     function () awful.tag.incmwfact( 0.05)    end),
-  awful.key({ modkey, 'Shift'   }, 'h',     function () awful.tag.incmwfact(-0.05)    end),
+  awful.key({ modkey, 'Shift'   }, 'l',     function () awful.tag.incmwfact(-0.05)    end),
+  awful.key({ modkey, 'Shift'   }, 'h',     function () awful.tag.incmwfact( 0.05)    end),
+  awful.key({ modkey, 'Shift'   }, 'j',     function () awful.tag.incmwfact(-0.05)    end),
+  awful.key({ modkey, 'Shift'   }, 'k',     function () awful.tag.incmwfact( 0.05)    end),
 
   awful.key({ modkey,           }, 'space', function () awful.layout.inc(layouts,  1) end),
   awful.key({ modkey, 'Shift'   }, 'space', function () awful.layout.inc(layouts, -1) end),
@@ -244,14 +245,14 @@ globalkeys = awful.util.table.join(
                                               )
                                             end),
 
-  -- the official weird buttons
-  awful.key({                   }, '#122',  function () awful.util.spawnwait('decrease-volume Master 5'); vicious.force({ volumebar }) end),  -- page up
-  awful.key({                   }, '#123',  function () awful.util.spawnwait('increase-volume Master 5'); vicious.force({ volumebar }) end),  -- page down
-  awful.key({                   }, '#121',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),  -- left
-  -- the back/forward buttons and left arrow
-  awful.key({ modkey            }, '#166',  function () awful.util.spawnwait('decrease-volume Master 5'); vicious.force({ volumebar }) end),  -- page up
-  awful.key({ modkey            }, '#167',  function () awful.util.spawnwait('increase-volume Master 5'); vicious.force({ volumebar }) end),  -- page down
-  awful.key({ modkey            }, '#113',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),  -- left
+  -- pizza keys
+  awful.key({                   }, '#122',  function () awful.util.spawnwait('decrease-volume Master 4'); vicious.force({ volumebar }) end),
+  awful.key({                   }, '#123',  function () awful.util.spawnwait('increase-volume Master 4'); vicious.force({ volumebar }) end),
+  awful.key({                   }, '#121',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),
+  -- pageup, pagedown, left arrow
+  awful.key({ modkey,           }, '#112',  function () awful.util.spawnwait('decrease-volume Master 4'); vicious.force({ volumebar }) end),
+  awful.key({ modkey,           }, '#117',  function () awful.util.spawnwait('increase-volume Master 4'); vicious.force({ volumebar }) end),
+  awful.key({ modkey            }, '#113',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),
 
   awful.key({ modkey, 'Shift'   }, 'r',     awesome.restart),
   awful.key({ modkey, 'Shift'   }, 'x',     awesome.quit)
@@ -315,14 +316,16 @@ awful.rules.rules = {
     properties = { floating = true } },
   { rule = { class = 'Anki' },
     properties = { floating = true } },
-  { rule = { name = 'luakit' },
-    properties = { tag = tags[1][3] } },
+  { rule = { class = 'Gimp' },
+    properties = { floating = true } },
+  { rule = { name = 'GLFW Window' },
+    properties = { floating = true } },
   { rule = { name = 'Mozilla Firefox' },
     properties = { tag = tags[1][3] } },
-  { rule = { name = 'New Tab - Chromium' },
+  { rule = { class = 'Chromium' },
     properties = { tag = tags[1][4] } },
-  { rule = { name = 'Aurora' },
-    properties = { tag = tags[1][5] } },
+  { rule = { class = 'Inkscape' },
+    properties = { tag = tags[1][4] } },
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
