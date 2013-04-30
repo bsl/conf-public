@@ -132,7 +132,6 @@ Bundle 'Align'
 Bundle 'Command-T'
 Bundle 'DeleteTrailingWhitespace'
 Bundle 'EasyMotion'
-Bundle 'Lokaltog/powerline'
 Bundle 'ShowTrailingWhitespace'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'closetag.vim'
@@ -152,7 +151,19 @@ Bundle 'vimwiki'
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-source ~/.vim/bundle/powerline/powerline/bindings/vim/plugin/powerline.vim
+set rtp+=~/local/powerline/bindings/vim
+
+" https://powerline.readthedocs.org/en/latest/tipstricks.html
+" if ! has('gui_running')
+"     set ttimeoutlen=10
+"     augroup FastEscape
+"         autocmd!
+"         au InsertEnter * set timeoutlen=0
+"         au InsertLeave * set timeoutlen=1000
+"     augroup END
+" endif
+
+" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 colorscheme jellybeans
 
