@@ -2,9 +2,10 @@
 
 PATH=$HOME/bin/public:$HOME/bin/private
 PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
+PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
 PATH=$PATH:$HOME/.cabal/bin
 PATH=$PATH:$HOME/.npm/bin
-PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
+PATH=$PATH:$HOME/.local/bin
 export PATH
 
 export EDITOR=/usr/bin/vim
