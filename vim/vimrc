@@ -8,10 +8,11 @@ set backspace=indent,eol,start
 set encoding=utf-8
 set nojoinspaces
 set nomodeline
+set scrolloff=4
+set noesckeys
 
 set ttymouse=xterm2
 set mouse=a " for scroll wheel. do normal term copying by holding shift
-set clipboard=unnamed
 
 set guioptions=aegirLt
 
@@ -23,7 +24,7 @@ let mapleader = ","
 
 imap jj <esc>
 
-nmap <leader>ww :w<cr>
+nmap <cr> :write<cr>
 
 map <leader>sv :source ~/.vimrc<cr>
 
@@ -46,6 +47,11 @@ nmap <leader>v mz:set paste<cr>"*P:set nopaste<cr>`z
 
 nmap <silent> <leader>ss :setlocal spell!<cr>
 set spelllang=en
+
+noremap <c-h> <c-w>h
+noremap <c-l> <c-w>l
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -123,25 +129,30 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'Align'
-"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Command-T'
+Bundle 'DeleteTrailingWhitespace'
+Bundle 'EasyMotion'
 Bundle 'Lokaltog/powerline'
+Bundle 'ShowTrailingWhitespace'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'closetag.vim'
+Bundle 'ctrlp.vim'
 Bundle 'gnupg.vim'
+Bundle 'goldfeld/vim-seek'
+Bundle 'jellybeans.vim'
 Bundle 'localvimrc'
+Bundle 'phd'
 Bundle 'tpope/vim-afterimage'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'vimwiki'
-Bundle 'ShowTrailingWhitespace'
-Bundle 'DeleteTrailingWhitespace'
-Bundle 'ctrlp.vim'
-Bundle 'phd'
-Bundle 'jellybeans.vim'
+" Bundle 'wikitopian/hardmode'
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-source ~/.vim/bundle/powerline/powerline/bindings/vim/plugin/source_plugin.vim
+source ~/.vim/bundle/powerline/powerline/bindings/vim/plugin/powerline.vim
 
 colorscheme jellybeans
 
