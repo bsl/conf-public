@@ -1,4 +1,4 @@
-browser firefox
+browser open-url
 datetime-format %Y.%m.%d %R
 
 bind-key j down
@@ -15,4 +15,7 @@ notify-beep yes # for urgency
 
 history-limit 0
 
-ignore-article "http://feeds.penny-arcade.com/pa-mainsite" "title =~ \"^News:\""
+ignore-article "http://feeds.penny-arcade.com/pa-mainsite" "title =~ \"News:\""
+
+# proxy 127.0.0.1:9000
+# proxy-type socks5
