@@ -2,7 +2,7 @@ URxvt*cutchars:
 URxvt*urgentOnBell: true
 
 URxvt*scrollBar: false
-URxvt*font: xft:Terminus:size=12:antialias=false,xft:Microsoft Yahei
+URxvt*font: xft:Terminus,xft:Microsoft Yahei
 URxvt*borderless: true
 !URxvt*cursorBlink: true
 
@@ -25,8 +25,8 @@ URxvt*color13: #af9ebe
 URxvt*color14: #51bebe
 URxvt*color15: #dfffff
 
-URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus:size=12, xft:Microsoft Yahei\007
-URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=24, xft:Microsoft Yahei\007
+!URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus,xft:Microsoft Yahei\007
+!URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=20,xft:Microsoft Yahei\007
 
 !URxvt.perl-ext-common: default,matcher!,highlight-focused
 !URxvt.perl-ext-common: default,matcher
