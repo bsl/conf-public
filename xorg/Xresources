@@ -1,29 +1,30 @@
-URxvt*cutchars:
-URxvt*urgentOnBell: true
-
-URxvt*scrollBar: false
-URxvt*font: xft:Terminus,xft:Microsoft Yahei
-URxvt*borderless: true
-!URxvt*cursorBlink: true
-
-URxvt*background: black
-URxvt*foreground: gray
-URxvt*color0:  #000000
-URxvt*color1:  #7e1828
-URxvt*color2:  #8ece92
-URxvt*color3:  #768a38
-URxvt*color4:  #214171
-URxvt*color5:  #763c59
-URxvt*color6:  #218179
-URxvt*color7:  #9ebebe
-URxvt*color8:  #466666
-URxvt*color9:  #af6171
-URxvt*color10: #a5f779
-URxvt*color11: #dff796
-URxvt*color12: #2186be
-URxvt*color13: #af9ebe
-URxvt*color14: #51bebe
-URxvt*color15: #dfffff
+!URxvt*cutchars:
+!URxvt*urgentOnBell: true
+!
+!URxvt*scrollBar: false
+!URxvt*font: xft:Terminus
+!!,xft:Microsoft Yahei
+!URxvt*borderless: true
+!!URxvt*cursorBlink: true
+!
+!URxvt*background: black
+!URxvt*foreground: gray
+!URxvt*color0:  #000000
+!URxvt*color1:  #7e1828
+!URxvt*color2:  #8ece92
+!URxvt*color3:  #768a38
+!URxvt*color4:  #214171
+!URxvt*color5:  #763c59
+!URxvt*color6:  #218179
+!URxvt*color7:  #9ebebe
+!URxvt*color8:  #466666
+!URxvt*color9:  #af6171
+!URxvt*color10: #a5f779
+!URxvt*color11: #dff796
+!URxvt*color12: #2186be
+!URxvt*color13: #af9ebe
+!URxvt*color14: #51bebe
+!URxvt*color15: #dfffff
 
 !URxvt.keysym.Mod4-F1: command:\033]50;xft:Terminus,xft:Microsoft Yahei\007
 !URxvt.keysym.Mod4-F2: command:\033]50;xft:Terminus:size=20,xft:Microsoft Yahei\007

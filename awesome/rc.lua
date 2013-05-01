@@ -1,12 +1,40 @@
 local awful = require('awful')
-awful.autofocus = require('awful.autofocus')
 awful.rules = require('awful.rules')
+require('awful.autofocus')
 
 local beautiful = require('beautiful')
 local naughty   = require('naughty')
 local scratch   = require('scratch')
 local vicious   = require('vicious')
 local wibox     = require('wibox')
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- Check if awesome encountered an error during startup and fell back to
+-- another config (This code will only ever execute for the fallback config)
+if awesome.startup_errors then
+  naughty.notify({
+    preset = naughty.config.presets.critical,
+    title  = "Oops, there were errors during startup!",
+    text   = awesome.startup_errors
+  })
+end
+
+-- Handle runtime errors after startup
+do
+  local in_error = false
+  awesome.connect_signal("debug::error", function (err)
+    -- Make sure we don't go into an endless error loop
+    if in_error then return end
+    in_error = true
+    naughty.notify({
+      preset = naughty.config.presets.critical,
+      title  = "Oops, an error happened!",
+      text   = err
+    })
+    in_error = false
+  end)
+end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -17,26 +45,15 @@ local wiboxheight = 20
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local layouts =
-{
+local layouts = {
   awful.layout.suit.max,
   awful.layout.suit.tile.left,
   awful.layout.suit.tile.top
-  -- awful.layout.suit.tile,
-  -- awful.layout.suit.tile.bottom,
 }
 
-local tags = {
-  names = {
-    1, 2, 3, 4, 5, 6, 7, 8, 9
-  },
-  layout = {
-    layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1]
-  }
-}
-
+tags = {}
 for s = 1, screen.count() do
-  tags[s] = awful.tag(tags.names, s, tags.layout)
+  tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -59,7 +76,6 @@ space:set_text(' ')
 
 local volumebar = awful.widget.progressbar()
 volumebar:set_width(4)
--- volumebar:set_height(wiboxheight)
 volumebar:set_vertical(true)
 volumebar:set_border_color(nil)
 
@@ -98,53 +114,50 @@ vicious.register(datebox, vicious.widgets.date, format, 61)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local membar = awful.widget.progressbar()
-membar:set_width(4)
--- membar:set_height(4)
-membar:set_vertical(true)
-membar:set_background_color('#494b4f')
-membar:set_border_color(nil)
-membar:set_color('#aecf96')
+-- local membar = awful.widget.progressbar()
+-- membar:set_width(4)
+-- membar:set_vertical(true)
+-- membar:set_background_color('#494b4f')
+-- membar:set_border_color(nil)
+-- membar:set_color('#aecf96')
 
-vicious.register(membar, vicious.widgets.mem, '$1', 3)
-
--- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-
-local cpugraph = awful.widget.graph()
-cpugraph:set_width(16)
--- cpugraph:set_height(wiboxheight)
-cpugraph:set_background_color('#494b4f')
-cpugraph:set_color('#ff5656')
-
-vicious.register(cpugraph, vicious.widgets.cpu, "$1", 2)
+-- vicious.register(membar, vicious.widgets.mem, '$1', 10)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local batterybar = awful.widget.progressbar()
-batterybar:set_width(4)
--- batterybar:set_height(wiboxheight)
-batterybar:set_vertical(true)
-batterybar:set_background_color('#494b4f')
-batterybar:set_border_color(nil)
-batterybar:set_color('#aecf96')
+-- local cpugraph = awful.widget.graph()
+-- cpugraph:set_width(16)
+-- cpugraph:set_background_color('#494b4f')
+-- cpugraph:set_color('#ff5656')
 
-vicious.register(
-  batterybar,
-  vicious.widgets.bat,
-  function (widget, args)
-    bat_state  = args[1]
-    bat_charge = args[2]
-    -- bat_time   = args[3]
-    if bat_state == '↯' or bat_state == '+' or bat_state == '⌁' then
-      widget:set_color('#aecf96')
-    else
-      widget:set_color('#ff8e76')
-    end
-    return bat_charge
-  end,
-  11,
-  'BAT0'
-)
+-- vicious.register(cpugraph, vicious.widgets.cpu, "$1", 1)
+
+-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+
+-- local batterybar = awful.widget.progressbar()
+-- batterybar:set_width(4)
+-- batterybar:set_vertical(true)
+-- batterybar:set_background_color('#494b4f')
+-- batterybar:set_border_color(nil)
+-- batterybar:set_color('#aecf96')
+
+-- vicious.register(
+--   batterybar,
+--   vicious.widgets.bat,
+--   function (widget, args)
+--     bat_state  = args[1]
+--     bat_charge = args[2]
+--     -- bat_time   = args[3]
+--     if bat_state == '↯' or bat_state == '+' or bat_state == '⌁' then
+--       widget:set_color('#aecf96')
+--     else
+--       widget:set_color('#ff8e76')
+--     end
+--     return bat_charge
+--   end,
+--   11,
+--   'BAT0'
+-- )
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -160,20 +173,20 @@ for s = 1, screen.count() do
   left_wibox:add(space)
   left_wibox:add(volumebar)
 
-  local right_wibox = wibox.layout.fixed.horizontal()
-  right_wibox:add(cpugraph)
-  right_wibox:add(space)
-  right_wibox:add(membar)
-  right_wibox:add(space)
-  right_wibox:add(datebox)
-  right_wibox:add(space)
-  right_wibox:add(timebox)
-  right_wibox:add(space)
-  right_wibox:add(batterybar)
+  -- local right_wibox = wibox.layout.fixed.horizontal()
+  -- right_wibox:add(cpugraph)
+  -- right_wibox:add(space)
+  -- right_wibox:add(membar)
+  -- right_wibox:add(space)
+  -- right_wibox:add(datebox)
+  -- right_wibox:add(space)
+  -- right_wibox:add(timebox)
+  -- right_wibox:add(space)
+  -- right_wibox:add(batterybar)
 
   local wibox_layout = wibox.layout.align.horizontal()
   wibox_layout:set_left(left_wibox)
-  wibox_layout:set_right(right_wibox)
+  -- wibox_layout:set_right(right_wibox)
 
   mywibox[s]:set_widget(wibox_layout)
 end
@@ -265,12 +278,7 @@ clientkeys = awful.util.table.join(
   awful.key({ modkey,           }, 'Return', function (c) c:swap(awful.client.getmaster()) end)
 )
 
-local keynumber = 0
-for s = 1, screen.count() do
-  keynumber = math.min(9, math.max(#tags[s], keynumber));
-end
-
-for i = 1, keynumber do
+for i = 1, 9 do
   globalkeys = awful.util.table.join(globalkeys,
     awful.key(
       { modkey }, '#' .. i + 9,
@@ -330,30 +338,28 @@ awful.rules.rules = {
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
--- client.connect_signal(
---   'manage',
---   function(c, startup)
---     -- Enable sloppy focus
---     c:connect_signal(
---       'mouse::enter',
---       function(c)
---         if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier and
---            awful.client.focus.filter(c)
---         then
---           client.focus = c
---         end
---       end
---     )
+-- Signal function to execute when a new client appears.
+client.connect_signal("manage", function (c, startup)
+  -- Enable sloppy focus
+  c:connect_signal("mouse::enter", function(c)
+    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+      and awful.client.focus.filter(c) then
+      client.focus = c
+    end
+  end)
 
---     if not startup then
---       awful.client.setslave(c)
---       if not c.size_hints.user_position and not c.size_hints.program_position then
---         awful.placement.no_overlap(c)
---         awful.placement.no_offscreen(c)
---       end
---     end
---   end
--- )
+  if not startup then
+    -- Set the windows at the slave,
+    -- i.e. put it at the end of others instead of setting it master.
+    -- awful.client.setslave(c)
 
-client.connect_signal('focus',   function (c) c.border_color = beautiful.border_focus  end)
-client.connect_signal('unfocus', function (c) c.border_color = beautiful.border_normal end)
+    -- Put windows in a smart way, only if they does not set an initial position.
+    if not c.size_hints.user_position and not c.size_hints.program_position then
+      awful.placement.no_overlap(c)
+      awful.placement.no_offscreen(c)
+    end
+  end
+end)
+
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
