@@ -26,7 +26,7 @@ cursor_blink = on
 cursor_shape = block
 
 # $BROWSER is used by default
-#browser = firefox
+browser = open-url
 
 # word characters used for word selection
 # (default if unset: all graphic non-punctuation/space characters)
@@ -83,7 +83,7 @@ color15 = #dfffff
 #background = #3f3f3f
 padding = 0
 #border = #3f3f3f
-border_width = 0.5
+border_width = 0
 #roundness = 2.0
 
 # vim: ft=dosini
