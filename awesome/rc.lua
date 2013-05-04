@@ -5,8 +5,10 @@ require('awful.autofocus')
 local beautiful = require('beautiful')
 local naughty   = require('naughty')
 local scratch   = require('scratch')
-local vicious   = require('vicious')
 local wibox     = require('wibox')
+
+-- 'vicious' not declared local so it can be used via awesome-client(1)
+vicious = require('vicious')
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -63,10 +65,6 @@ function num(s) return wrap(s, 'darkgray')  end
 function let(s) return wrap(s, 'lightblue') end
 function sym(s) return wrap(s, '#606060')   end
 
-awful.util.spawnwait = function (cmd)
-  awful.util.pread(cmd)
-end
-
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
 local space = wibox.widget.textbox()
@@ -74,7 +72,8 @@ space:set_text(' ')
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local volumebar = awful.widget.progressbar()
+-- 'volumebar' not declared local for use by awesome-client(1)
+volumebar = awful.widget.progressbar()
 volumebar:set_width(4)
 volumebar:set_vertical(true)
 volumebar:set_border_color(nil)
@@ -100,17 +99,20 @@ vicious.force({ volumebar })
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local timebox = wibox.widget.textbox()
-local format = num('%H') .. sym(':') .. num('%M') -- .. sym(':') .. num('%S')
-
-vicious.register(timebox, vicious.widgets.date, format, 61)
+-- local timebox = wibox.widget.textbox()
+-- vicious.register(
+--   timebox,
+--   vicious.widgets.date,
+--   num('%H')..sym(':')..num('%M')..sym(':')..num('%S'),
+--   10
+-- )
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
-local datebox = wibox.widget.textbox()
-local format = num('%Y') .. ' ' .. num('%m') .. sym('/') .. let('%b') .. ' ' .. num('%d') .. sym('/') .. let('%a')
+-- local datebox = wibox.widget.textbox()
+-- local format = num('%Y') .. ' ' .. num('%m') .. sym('/') .. let('%b') .. ' ' .. num('%d') .. sym('/') .. let('%a')
 
-vicious.register(datebox, vicious.widgets.date, format, 61)
+-- vicious.register(datebox, vicious.widgets.date, format, 61)
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
 
@@ -204,6 +206,9 @@ local function makefocusbydirection(d)
 end
 
 globalkeys = awful.util.table.join(
+  awful.key({ modkey, 'Shift'   }, 'r',     awesome.restart),
+  awful.key({ modkey, 'Shift'   }, 'x',     awesome.quit),
+
   awful.key({ modkey            }, 'u',     awful.tag.viewprev),
   awful.key({ modkey            }, 'o',     awful.tag.viewnext),
   awful.key({ modkey            }, 'q',     awful.tag.history.restore),
@@ -218,17 +223,14 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey, 'Control' }, 'h',     function () awful.client.swap.bydirection('left')  end),
   awful.key({ modkey, 'Control' }, 'l',     function () awful.client.swap.bydirection('right') end),
 
-  awful.key({ modkey, 'Shift'   }, 'l',     function () awful.tag.incmwfact(-0.05)    end),
-  awful.key({ modkey, 'Shift'   }, 'h',     function () awful.tag.incmwfact( 0.05)    end),
-  awful.key({ modkey, 'Shift'   }, 'j',     function () awful.tag.incmwfact(-0.05)    end),
-  awful.key({ modkey, 'Shift'   }, 'k',     function () awful.tag.incmwfact( 0.05)    end),
+  awful.key({ modkey, 'Shift'   }, 'l',     function () awful.tag.incmwfact(-0.05) end),
+  awful.key({ modkey, 'Shift'   }, 'h',     function () awful.tag.incmwfact( 0.05) end),
+  awful.key({ modkey, 'Shift'   }, 'j',     function () awful.tag.incmwfact(-0.05) end),
+  awful.key({ modkey, 'Shift'   }, 'k',     function () awful.tag.incmwfact( 0.05) end),
 
   awful.key({ modkey,           }, 'space', function () awful.layout.inc(layouts,  1) end),
   awful.key({ modkey, 'Shift'   }, 'space', function () awful.layout.inc(layouts, -1) end),
 
-  awful.key({ modkey            }, '0',     function () awful.util.spawn('lock-screen', false) end),
-  awful.key({ modkey            }, 'i',     function () awful.util.spawn('run-terminal', false) end),
-  awful.key({ modkey            }, 'p',     function () awful.util.spawn('run-program', false) end),
   awful.key({ modkey            }, 'y',     function () scratch.drop('run-terminal', 'center', 'center', 0.5, 0.5) end),
 
   awful.key({ modkey            }, 'e',     function ()
@@ -256,26 +258,14 @@ globalkeys = awful.util.table.join(
                                                   end
                                                 end
                                               )
-                                            end),
-
-  -- pizza keys
-  awful.key({                   }, '#122',  function () awful.util.spawnwait('decrease-volume Master 4'); vicious.force({ volumebar }) end),
-  awful.key({                   }, '#123',  function () awful.util.spawnwait('increase-volume Master 4'); vicious.force({ volumebar }) end),
-  awful.key({                   }, '#121',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),
-  -- pageup, pagedown, left arrow
-  awful.key({ modkey,           }, '#112',  function () awful.util.spawnwait('decrease-volume Master 4'); vicious.force({ volumebar }) end),
-  awful.key({ modkey,           }, '#117',  function () awful.util.spawnwait('increase-volume Master 4'); vicious.force({ volumebar }) end),
-  awful.key({ modkey            }, '#113',  function () awful.util.spawnwait('toggle-mute Master');       vicious.force({ volumebar }) end),
-
-  awful.key({ modkey, 'Shift'   }, 'r',     awesome.restart),
-  awful.key({ modkey, 'Shift'   }, 'x',     awesome.quit)
+                                            end)
 )
 
 clientkeys = awful.util.table.join(
-  awful.key({ modkey,           }, 'f',      function (c) c.fullscreen = not c.fullscreen end),
-  awful.key({ modkey,           }, 'c',      function (c) c:kill() end),
-  awful.key({ modkey,           }, 't',      awful.client.floating.toggle),
-  awful.key({ modkey,           }, 'Return', function (c) c:swap(awful.client.getmaster()) end)
+  awful.key({ modkey }, 'f',      function (c) c.fullscreen = not c.fullscreen end),
+  awful.key({ modkey }, 'c',      function (c) c:kill() end),
+  awful.key({ modkey }, 't',      awful.client.floating.toggle),
+  awful.key({ modkey }, 'Return', function (c) c:swap(awful.client.getmaster()) end)
 )
 
 for i = 1, 9 do
