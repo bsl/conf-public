@@ -15,19 +15,18 @@ xset fp rehash
 # speed up keyboard repeat
 xset r rate 200 50
 
-# make caps lock another ctrl key
+# make CapsLock work like Ctrl
 setxkbmap -option ctrl:nocaps
 
-xbacklight -set 65
+xbacklight -set 60
+xsetroot -solid "#0f0f0f"
 disable-screen-blanking
-
-xsetroot -solid '#0f0f0f'
 
 export XMODIFIERS="@im=SCIM"
 export GTK_IM_MODULE="scim"
 export QT_IM_MODULE="scim"
 scim -d
 
-urxvtd -q -f -o
+xchainkeys &
 
 exec awesome
