@@ -31,8 +31,8 @@ do
     in_error = true
     naughty.notify({
       preset = naughty.config.presets.critical,
-      title  = "Oops, an error happened!",
-      text   = err
+      title = "Oops, an error happened!",
+      text = err
     })
     in_error = false
   end)
@@ -218,6 +218,12 @@ globalkeys = awful.util.table.join(
   awful.key({ modkey            }, 'h',     makefocusbydirection('left')),
   awful.key({ modkey            }, 'l',     makefocusbydirection('right')),
 
+  -- cycle through maximized clients on the same workspace
+  awful.key({ modkey,           }, 'Tab',   function ()
+                                              awful.client.focus.byidx(-1)
+                                              if client.focus then client.focus:raise() end
+                                            end),
+
   awful.key({ modkey, 'Control' }, 'j',     function () awful.client.swap.bydirection('down')  end),
   awful.key({ modkey, 'Control' }, 'k',     function () awful.client.swap.bydirection('up')    end),
   awful.key({ modkey, 'Control' }, 'h',     function () awful.client.swap.bydirection('left')  end),
@@ -306,24 +312,17 @@ awful.rules.rules = {
                    focus        = true,
                    keys         = clientkeys,
                    buttons      = clientbuttons } },
-  { rule = { class = 'Audacity' },
-    properties = { floating = true } },
-  { rule = { class = 'MPlayer' },
-    properties = { floating = true } },
-  { rule = { class = 'vncviewer' },
-    properties = { floating = true } },
-  { rule = { class = 'Anki' },
-    properties = { floating = true } },
-  { rule = { class = 'Gimp' },
-    properties = { floating = true } },
-  { rule = { name = 'GLFW Window' },
-    properties = { floating = true } },
-  { rule = { name = 'Mozilla Firefox' },
-    properties = { tag = tags[1][3] } },
-  { rule = { class = 'Chromium' },
-    properties = { tag = tags[1][4] } },
-  { rule = { class = 'Inkscape' },
-    properties = { tag = tags[1][4] } },
+    { rule = { class = 'Audacity'        }, properties = { floating = true       } },
+    { rule = { class = 'MPlayer'         }, properties = { floating = true       } },
+    { rule = { class = 'vncviewer'       }, properties = { floating = true       } },
+    { rule = { class = 'Anki'            }, properties = { floating = true       } },
+    { rule = { class = 'Gimp'            }, properties = { floating = true       } },
+    { rule = { name  = 'sprite'          }, properties = { floating = true       } },
+    { rule = { name  = 'GLFW-b-demo'     }, properties = { floating = true       } },
+    { rule = { name  = 'GLFW-b test'     }, properties = { floating = true       } },
+    { rule = { class = 'feh'             }, properties = { floating = true       } },
+    { rule = { name  = 'Mozilla Firefox' }, properties = { tag      = tags[1][3] } },
+    { rule = { class = 'Chromium'        }, properties = { tag      = tags[1][5] } },
 }
 
 -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
