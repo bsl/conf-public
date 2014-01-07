@@ -10,6 +10,11 @@ set nojoinspaces
 set nomodeline
 set scrolloff=4
 set noesckeys
+set shell=sh
+set hlsearch incsearch
+set cursorline
+set textwidth=96
+set ttimeoutlen=50
 
 set ttymouse=xterm2
 set mouse=a " for scroll wheel. do normal term copying by holding shift
@@ -23,12 +28,16 @@ filetype plugin indent on
 let mapleader = ","
 
 imap jj <esc>
+imap jk <esc>
+imap kj <esc>
 
 nmap <cr> :write<cr>
 
 map <leader>sv :source ~/.vimrc<cr>
 
-nmap <silent> <f2> :Sexplore<cr>
+" sort a block, like Java import statements
+nmap <silent> <f2> mzvip:sort<cr>`z:echo "### Sorted!!! ###"<cr>
+vmap <silent> <f2> mz:sort<cr>`z:echo "### Sorted!!! ###"<cr>
 
 function! BrianReplaceWord(word0, word1)
   let l:pos = getpos(".")
@@ -37,9 +46,18 @@ function! BrianReplaceWord(word0, word1)
 endfunction
 nmap <f4> :call BrianReplaceWord("<c-r><c-w>", "")<Left><Left>
 
-nmap <silent> <f6> :bp<cr>
-nmap <silent> <f7> :bn<cr>
-nmap <silent> <f8> :bd<cr>
+nmap <silent> <f5> :tabmove -1<cr>
+nmap <silent> <f6> :tabmove +1<cr>
+
+" move left/right in tabs
+nmap <silent> <f7> gT<cr>
+nmap <silent> <f8> gt<cr>
+
+" move left/right in buffers
+nmap <silent> <f9>  :bp<cr>
+nmap <silent> <f10> :bn<cr>
+
+nmap <silent> <f11> :bd<cr>
 
 " nice pasting from clipboard
 imap <leader>v <c-o>mz<c-o>:set paste<cr><c-r>*<c-o>:set nopaste<cr><c-o>`z
@@ -52,6 +70,8 @@ noremap <c-h> <c-w>h
 noremap <c-l> <c-w>l
 noremap <c-j> <c-w>j
 noremap <c-k> <c-w>k
+
+nmap <silent> <f12> :noh<cr>
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -81,16 +101,18 @@ syntax on
 highlight SpellBad ctermbg=17 ctermfg=15
 highlight SpellCap ctermbg=17 ctermfg=15
 
-set autoindent smartindent
 set shiftwidth=2 tabstop=2 expandtab
 set nowrap
 
 set list listchars=tab:»·,trail:·
 
-set cinoptions =:0  " don't indent 'case' in 'switch'
+" set cinoptions+=>2
+set cinoptions+=:0  " don't indent 'case' in 'switch'
 set cinoptions+=ls  " regular alignment of {} in 'case'
 set cinoptions+=(s  " regular indentation after trailing (
 set cinoptions+=m1  " deindent closing )
+set cinoptions+=j1  " indent Java anonymous classes correctly
+set cinoptions+=J1  " indent Javascript object declarations correctly
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -134,20 +156,22 @@ Bundle 'DeleteTrailingWhitespace'
 Bundle 'EasyMotion'
 Bundle 'ShowTrailingWhitespace'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'bling/vim-airline'
+Bundle 'bufkill.vim'
 Bundle 'closetag.vim'
-Bundle 'ctrlp.vim'
 Bundle 'gnupg.vim'
 Bundle 'goldfeld/vim-seek'
 Bundle 'jellybeans.vim'
-Bundle 'localvimrc'
-Bundle 'phd'
 Bundle 'tpope/vim-afterimage'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'vimwiki'
-" Bundle 'wikitopian/hardmode'
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 " - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
