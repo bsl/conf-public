@@ -107,29 +107,23 @@ export VISUAL=vim
 
 hash -d d="${HOME}/tmp/download"
 
+alias pmd.='pmd . text ~/conf/public/pmd/pmd.xml'
+alias pmdr='pmd src/main/java text ~/conf/public/pmd/pmd.xml | cut -d/ -f13- | sort -u'
+alias pmdrx='pmd src/main/java text ~/conf/public/pmd/pmdx.xml | cut -d/ -f13- | sort -u'
+
+alias vi='vim'
+alias vima='vim $(find . -path "./.git" -prune -o -path "./dist" -prune -o -type f -print)'
+
 alias beep="echo -e '\007'"
 alias pwsafe='pwsafe -q'
-alias vi='vim'
 alias ls='ls --color=auto --group-directories-first'
 alias exif="gm identify -format '%[EXIF:*]'"
-alias emulator='emulator -no-audio -no-boot-anim'
-alias rhino='java -jar /usr/share/java/js.jar'
-#alias pacman='pacman-color'
-
-alias -g G='|grep --color=auto'
-alias -g L='|less'
-
 alias optipng='optipng -zc1-9 -zm1-9 -zs0-3 -f0-5'
-
-alias vima='vim $(find . -path "./.git" -prune -o -path "./dist" -prune -o -type f -print)'
 alias space='du -s -B 1M * | sort -nr | less'
 alias hadd='cabal haddock && firefox dist/doc/html/*/index.html'
-alias ca='cabal clean && cabal configure && cabal build'
-alias jruby='/opt/jruby/bin/jruby --fast --server -J-Djruby.objectspace.enabled=false'
+alias ca='cabal clean && cabal configure --enable-tests && cabal build'
 
-alias -s pdf=evince
-
-eval $(dircolors -b)
+alias -g L='|less'
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
