@@ -10,6 +10,7 @@
   smtpserver = /usr/bin/msmtp
 
 [core]
+  autocrlf = false
   excludesfile = ~/conf/public/git/gitignore_global
 [push]
   default = simple
