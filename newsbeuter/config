@@ -10,7 +10,7 @@ bind-key x quit
 
 auto-reload yes
 reload-time 30
-reload-threads 8
+reload-threads 4
 notify-beep yes # for urgency
 
 history-limit 0
