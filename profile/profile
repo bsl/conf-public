@@ -2,6 +2,7 @@
 
 PATH=$HOME/bin/public:$HOME/bin/private
 PATH=$PATH:/bin:/usr/bin:/sbin:/usr/sbin
+PATH=$PATH:/usr/bin/core_perl
 PATH=$PATH:$(ruby -rubygems -e "puts Gem.user_dir")/bin
 PATH=$PATH:$HOME/.cabal/bin
 PATH=$PATH:$HOME/.npm/bin
@@ -20,3 +21,5 @@ then
 fi
 
 eval $(keychain --eval --nogui -q id_rsa)
+
+eval $(dircolors $HOME/conf/public/dircolors/256dark)
