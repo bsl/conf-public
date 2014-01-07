@@ -28,8 +28,6 @@ filetype plugin indent on
 let mapleader = ","
 
 imap jj <esc>
-imap jk <esc>
-imap kj <esc>
 
 nmap <cr> :write<cr>
 
