@@ -13,7 +13,7 @@ set noesckeys
 set shell=sh
 set hlsearch incsearch
 set cursorline
-set textwidth=96
+set textwidth=100
 set ttimeoutlen=50
 
 set ttymouse=xterm2
@@ -52,6 +52,7 @@ nmap <silent> <f7> gT<cr>
 nmap <silent> <f8> gt<cr>
 
 " move left/right in buffers
+set hidden
 nmap <silent> <f9>  :bp<cr>
 nmap <silent> <f10> :bn<cr>
 
