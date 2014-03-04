@@ -18,3 +18,8 @@ user_pref("network.security.ports.banned.override", "1-65535");
 /* Don't animate tabs.
  */
 user_pref("browser.tabs.animate", false);
+
+/* Improve SSL security.
+ */
+user_pref("security.tls.version.max", 3);
+user_pref("security.ssl3.rsa_fips_des_ede3_sha", false);
