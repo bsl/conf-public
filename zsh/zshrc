@@ -108,8 +108,8 @@ export VISUAL=vim
 hash -d d="${HOME}/tmp/download"
 
 alias pmd.='pmd . text ~/conf/public/pmd/pmd.xml'
-alias pmdr='pmd src/main/java text ~/conf/public/pmd/pmd.xml | cut -d/ -f13- | sort -u'
-alias pmdrx='pmd src/main/java text ~/conf/public/pmd/pmdx.xml | cut -d/ -f13- | sort -u'
+alias pmdr='pmd -dir src/main/java -R ~/conf/public/pmd/pmd.xml | cut -d/ -f13- | sort -u'
+alias pmdrx='pmd -dir src/main/java -R ~/conf/public/pmd/pmdx.xml | cut -d/ -f13- | sort -u'
 
 alias vi='vim'
 alias vima='vim $(find . -path "./.git" -prune -o -path "./dist" -prune -o -type f -print)'
